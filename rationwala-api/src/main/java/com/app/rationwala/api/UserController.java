@@ -1,10 +1,9 @@
 package com.app.rationwala.api;
 
+import com.app.rationwala.dto.RegisterRequest;
+import com.app.rationwala.dto.RegisterResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.model.LoginCredential;
@@ -30,6 +29,17 @@ public class UserController extends AbstractController {
 		;
 		try {
 			result = mapper.writeValueAsString(userService.login(request).getUserProfile());
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+
+	@PostMapping(value = "register", produces = "application/json")
+	public String register(@RequestBody RegisterRequest registerRequest) {
+		String result = null;
+		try {
+			result = mapper.writeValueAsString(userService.register(registerRequest));
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}

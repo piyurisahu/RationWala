@@ -1,10 +1,6 @@
 package com.app.rationwala.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class UserProfile {
@@ -12,7 +8,7 @@ public class UserProfile {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@OneToOne
+	@OneToOne(cascade = {CascadeType.ALL})
 	private UserLogin userLogin;
 	private String firstName;
 	private String lastName;
