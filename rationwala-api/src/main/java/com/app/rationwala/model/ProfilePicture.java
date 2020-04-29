@@ -1,5 +1,7 @@
 package com.app.rationwala.model;
 
-public class ProfilePicture {
+import lombok.Data;
+
+public @Data class ProfilePicture {
 
 }
