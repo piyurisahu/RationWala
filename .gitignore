@@ -5,22 +5,27 @@
 *.launch
   
 # misc  
-/.sass-cache  
-/connect.lock  
-/coverage  
+.sass-cache/  
+connect.lock/  
+coverage/
 /libpeerconnection.log  
 npm-debug.log  
 yarn-error.log  
 testem.log  
-/typings  
+typings/
   
 ##############################
 ## NodeJS
 ##############################
-/node_modules
-/dist  
-/tmp  
-/out-tsc
+node_modules/
+dist/  
+tmp/
+out-tsc/
+
+##############################
+## Only exists if Bazel was run
+##############################
+bazel-out/
 
 ##############################
 ## Java
@@ -106,12 +111,19 @@ nb-configuration.xml
 !.vscode/settings.json  
 !.vscode/tasks.json  
 !.vscode/launch.json  
-!.vscode/extensions.json 
+!.vscode/extensions.json
+.history/*
 
 ##############################
 ## Sublime text
 ##############################
 *.sublime-workspace
+
+##############################
+## profiling files
+##############################
+chrome-profiler-events*.json
+speed-measure-plugin*.json
 
 ##############################
 ## OS X
