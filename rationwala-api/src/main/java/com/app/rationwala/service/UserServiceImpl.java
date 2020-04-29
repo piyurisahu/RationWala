@@ -1,8 +1,5 @@
 package com.app.rationwala.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.rationwala.dto.LoginRequest;
@@ -14,8 +11,6 @@ import com.app.rationwala.entity.UserProfile;
 import com.app.rationwala.modeller.UserProfileModeller;
 import com.app.rationwala.repository.UserLoginRepository;
 import com.app.rationwala.repository.UserProfileRepository;
-
-import java.util.logging.Logger;
 
 public class UserServiceImpl implements UserService {
 
@@ -46,23 +41,12 @@ public class UserServiceImpl implements UserService {
 	public RegisterResponse register(RegisterRequest registerRequest) {
 		RegisterResponse res = new RegisterResponse();
 		com.app.rationwala.model.UserProfile modelUserProfile = registerRequest.getUserProfile();
-		Logger log = Logger.getGlobal();
-		ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
-		try {
-			log.info("The Register Request "+ mapper.writeValueAsString(registerRequest));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		UserProfile resp = userProfileRepository.save(new UserProfile(new UserLogin(registerRequest.getLoginCredential().getUsername(), registerRequest.getLoginCredential().getPassword()),
-						modelUserProfile.getFirstName(),
-						modelUserProfile.getLastName(),
-						modelUserProfile.getEmail(),
-						modelUserProfile.getPhoneNumber(),
-						modelUserProfile.getAddressLine1(),
-						modelUserProfile.getAddressLine2(),
-						modelUserProfile.getZipcode()
-				)
-		);
+		UserProfile resp = userProfileRepository.save(new UserProfile(
+				new UserLogin(registerRequest.getLoginCredential().getUsername(),
+						registerRequest.getLoginCredential().getPassword()),
+				modelUserProfile.getFirstName(), modelUserProfile.getLastName(), modelUserProfile.getEmail(),
+				modelUserProfile.getPhoneNumber(), modelUserProfile.getAddressLine1(),
+				modelUserProfile.getAddressLine2(), modelUserProfile.getZipcode()));
 		res.setUserProfile(new UserProfileModeller().marshall(resp));
 		return res;
 	}
