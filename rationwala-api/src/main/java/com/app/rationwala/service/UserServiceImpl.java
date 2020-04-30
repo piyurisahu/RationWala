@@ -44,16 +44,12 @@ public class UserServiceImpl implements UserService {
 			res.getStatusInfo().setMessage(new Message("ER001", env.getProperty("ER001")));
 			return res;
 		}
-		UserProfile userProfile = null;
-		if (userLogin.getPassword().equals(request.getLoginCredential().getPassword())) {
-			userProfile = userLogin.getUserProfile();
-		}
-		if (null == userProfile) {
+		if (!userLogin.getPassword().equals(request.getLoginCredential().getPassword())) {
 			res.getStatusInfo().setStatus(Status.FAILURE);
 			res.getStatusInfo().setMessage(new Message("ER002", env.getProperty("ER002")));
 			return res;
 		}
-		res.setUserProfile(userProfileModeller.marshall(userProfile));
+		res.setUserProfile(userProfileModeller.marshall(userLogin.getUserProfile()));
 		res.getStatusInfo().setStatus(Status.SUCCESS);
 		return res;
 	}
