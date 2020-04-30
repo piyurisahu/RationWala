@@ -8,6 +8,7 @@ import lombok.Data;
 public @Data class LoginResponse {
 	private LoginCredential loginCredential;
 	private UserProfile userProfile;
+	private StatusInfo statusInfo;
 
 	public LoginResponse() {
 	}

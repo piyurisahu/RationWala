@@ -6,6 +6,7 @@ import lombok.Data;
 
 public @Data class RegisterResponse {
 	private UserProfile userProfile;
+	private StatusInfo statusInfo;
 
 	public RegisterResponse() {
 	}
