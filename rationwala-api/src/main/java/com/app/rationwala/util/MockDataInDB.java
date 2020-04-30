@@ -1,5 +1,7 @@
 package com.app.rationwala.util;
 
+import java.util.stream.IntStream;
+
 import com.app.rationwala.entity.UserLogin;
 import com.app.rationwala.entity.UserProfile;
 import com.app.rationwala.repository.UserLoginRepository;
@@ -9,13 +11,14 @@ public class MockDataInDB {
 
 	public static void pushUserData(UserLoginRepository userLoginRepository,
 			UserProfileRepository userProfileRepository) {
-		userProfileRepository.save(new UserProfile(new UserLogin("anusha", "admin"), "Anusha", "Gupta",
-				"anusha@abc.com", "123456789", "add1", "add2", "12345"));
-		userProfileRepository.save(new UserProfile(new UserLogin("adi", "admin"), "Aditya", "Gupta", "adi@abc.com",
-				"123456789", "add1", "add2", "12345"));
-		userProfileRepository.save(new UserProfile(new UserLogin("suri", "admin"), "SuriVer", "Rag", "suri@abc.com",
-				"123456789", "add1", "add2", "12345"));
-		userProfileRepository.save(new UserProfile(new UserLogin("tg", "admin"), "Tarun", "Gupta", "tg@abc.com",
-				"123456789", "add1", "add2", "12345"));
+		IntStream.range(1, 11)
+				.forEach(userId -> userProfileRepository.save(new UserProfile(new UserLogin("user" + userId, "admin"),
+						"Firstname" + userId, "Lastname", "user" + userId + "@abc.com", "123456789",
+						"user" + userId + "add1", "user" + userId + "add2", "12345")));
+
+		IntStream.range(1, 11).forEach(userId -> userProfileRepository
+				.save(new UserProfile(new UserLogin("busUser" + userId, "admin"), "BusFirstname" + userId,
+						"BusLastname", "Bususer" + userId + "@abc.com", "123456789", "Bususer" + userId + "add1",
+						"Bususer" + userId + "add2", "12345", true, "Shop no: " + userId)));
 	}
 }
