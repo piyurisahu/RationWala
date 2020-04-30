@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 import com.app.rationwala.repository.UserLoginRepository;
 import com.app.rationwala.repository.UserProfileRepository;
+import com.app.rationwala.util.MockDataInDB;
 
 @SpringBootApplication
 public class RationwalaApiApplication {
@@ -22,7 +23,7 @@ public class RationwalaApiApplication {
 	public CommandLineRunner demo(UserLoginRepository userLoginRepository,
 			UserProfileRepository userProfileRepository) {
 		return (args) -> {
-			//MockDataInDB.pushUserData(userLoginRepository, userProfileRepository);
+			MockDataInDB.pushUserData(userLoginRepository, userProfileRepository);
 		};
 	}
 }
