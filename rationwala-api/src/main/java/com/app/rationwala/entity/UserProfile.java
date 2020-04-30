@@ -37,6 +37,9 @@ public @Entity @Data class UserProfile {
 	@OneToMany(mappedBy = "staff")
 	private Set<BusinessAuth> businesses;
 
+	public UserProfile() {
+	}
+
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
 			String addressLine1, String addressLine2, String zipcode, boolean businessProfile, String businessName) {
 		super();

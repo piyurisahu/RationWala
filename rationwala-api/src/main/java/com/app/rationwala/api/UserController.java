@@ -2,7 +2,6 @@ package com.app.rationwala.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +13,7 @@ import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.dto.LoginResponse;
 import com.app.rationwala.dto.RegisterRequest;
 import com.app.rationwala.dto.RegisterResponse;
+import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
@@ -40,7 +40,11 @@ public class UserController extends AbstractController {
 		ResponseEntity<LoginResponse> res = null;
 		try {
 			log.debug(mapper.writeValueAsString(loginRequest));
-			res = new ResponseEntity<LoginResponse>(userService.login(loginRequest), HttpStatus.OK);
+			LoginResponse lres = userService.login(loginRequest);
+			HttpStatus status = HttpStatus.OK;
+			if (Status.FAILURE.equals(lres.getStatusInfo().getStatus()))
+				status = HttpStatus.NOT_FOUND;
+			res = new ResponseEntity<LoginResponse>(userService.login(loginRequest), status);
 		} catch (JsonProcessingException e) {
 			res = new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());

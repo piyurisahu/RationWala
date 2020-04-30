@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -16,6 +17,9 @@ public @Entity @Data class UserLogin {
 	@Column(unique = true)
 	private String username;
 	private String password;
+
+	@OneToOne(mappedBy = "userLogin")
+	private UserProfile userProfile;
 
 	protected UserLogin() {
 	}
