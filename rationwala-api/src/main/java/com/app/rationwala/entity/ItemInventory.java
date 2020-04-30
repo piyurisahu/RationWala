@@ -20,6 +20,8 @@ public @Entity @Data class ItemInventory {
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Item item;
 
+	private String description;
+
 	private double price;
 
 	private int quantity;
