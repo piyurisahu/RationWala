@@ -2,6 +2,9 @@ package com.app.rationwala.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,24 +36,30 @@ public class UserController extends AbstractController {
 	}
 
 	@PostMapping(value = "login", produces = "application/json")
-	public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
+		ResponseEntity<LoginResponse> res = null;
 		try {
 			log.debug(mapper.writeValueAsString(loginRequest));
+			res = new ResponseEntity<LoginResponse>(userService.login(loginRequest), HttpStatus.OK);
 		} catch (JsonProcessingException e) {
+			res = new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
 			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
 			log.error(e.getStackTrace().toString());
 		}
-		return userService.login(loginRequest);
+		return res;
 	}
 
 	@PostMapping(value = "register", produces = "application/json")
-	public RegisterResponse register(@RequestBody RegisterRequest registerRequest) {
+	public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
+		ResponseEntity<RegisterResponse> res = null;
 		try {
 			log.debug(mapper.writeValueAsString(registerRequest));
+			res = new ResponseEntity<RegisterResponse>(userService.register(registerRequest), HttpStatus.OK);
 		} catch (JsonProcessingException e) {
+			res = new ResponseEntity<RegisterResponse>(HttpStatus.BAD_REQUEST);
 			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
 			log.error(e.getStackTrace().toString());
 		}
-		return userService.register(registerRequest);
+		return res;
 	}
 }
