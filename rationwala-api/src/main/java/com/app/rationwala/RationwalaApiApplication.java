@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import com.app.rationwala.repository.UserLoginRepository;
 import com.app.rationwala.repository.UserProfileRepository;
 import com.app.rationwala.util.MockDataInDB;
 
@@ -17,10 +16,9 @@ public class RationwalaApiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserLoginRepository userLoginRepository,
-			UserProfileRepository userProfileRepository) {
+	public CommandLineRunner demo(UserProfileRepository userProfileRepository) {
 		return (args) -> {
-			MockDataInDB.pushUserData(userLoginRepository, userProfileRepository);
+			MockDataInDB.pushUserData(userProfileRepository);
 		};
 	}
 }
