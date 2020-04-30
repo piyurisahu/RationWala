@@ -5,6 +5,6 @@ import java.util.Set;
 import lombok.Data;
 
 public @Data class AuthorizeStaffRequest {
-	private Long businessUserProfileId;
+	private Long sellerUserProfileId;
 	private Set<StaffAuthorization> staffAuthorization;
 }

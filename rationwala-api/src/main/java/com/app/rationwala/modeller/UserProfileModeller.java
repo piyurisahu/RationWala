@@ -7,22 +7,16 @@ public class UserProfileModeller extends AbstractModeller {
 		com.app.rationwala.model.UserProfile result = null;
 		if (isNotNull(userProfile)) {
 			result = new com.app.rationwala.model.UserProfile();
-			if (isNotNull(userProfile.getId()))
-				result.setUserProfileId(userProfile.getId());
-			if (isNotNull(userProfile.getFirstName()))
-				result.setFirstName(userProfile.getFirstName());
-			if (isNotNull(userProfile.getLastName()))
-				result.setLastName(userProfile.getLastName());
-			if (isNotNull(userProfile.getEmail()))
-				result.setEmail(userProfile.getEmail());
-			if (isNotNull(userProfile.getAddressLine1()))
-				result.setAddressLine1(userProfile.getAddressLine1());
-			if (isNotNull(userProfile.getAddressLine2()))
-				result.setAddressLine2(userProfile.getAddressLine2());
-			if (isNotNull(userProfile.getPhoneNumber()))
-				result.setPhoneNumber(userProfile.getPhoneNumber());
-			if (isNotNull(userProfile.getZipcode()))
-				result.setZipcode(userProfile.getZipcode());
+			result.setUserProfileId(userProfile.getId());
+			result.setFirstName(userProfile.getFirstName());
+			result.setLastName(userProfile.getLastName());
+			result.setEmail(userProfile.getEmail());
+			result.setAddressLine1(userProfile.getAddressLine1());
+			result.setAddressLine2(userProfile.getAddressLine2());
+			result.setPhoneNumber(userProfile.getPhoneNumber());
+			result.setZipcode(userProfile.getZipcode());
+			result.setSellerProfile(userProfile.isSellerProfile());
+			result.setSellerBusinessName(userProfile.getSellerBusinessName());
 		}
 
 		return result;
@@ -32,10 +26,8 @@ public class UserProfileModeller extends AbstractModeller {
 		com.app.rationwala.model.LoginCredential result = null;
 		if (isNotNull(userLogin)) {
 			result = new com.app.rationwala.model.LoginCredential();
-			if (isNotNull(userLogin.getUsername()))
-				result.setUsername(userLogin.getUsername());
-			if (isNotNull(userLogin.getPassword()))
-				result.setPassword(userLogin.getPassword());
+			result.setUsername(userLogin.getUsername());
+			result.setPassword(userLogin.getPassword());
 		}
 		return result;
 	}

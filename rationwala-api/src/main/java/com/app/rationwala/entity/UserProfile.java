@@ -28,20 +28,27 @@ public @Entity @Data class UserProfile {
 	private String addressLine1;
 	private String addressLine2;
 	private String zipcode;
-	private boolean businessProfile;
-	private String businessName;
+	private boolean sellerProfile;
+	private String sellerBusinessName;
 
-	@OneToMany(mappedBy = "businessProfile")
-	private Set<StaffAuth> businesses;
+	@OneToMany(mappedBy = "sellerProfile")
+	private Set<StaffAuth> sellerProfiles;
 
 	@OneToMany(mappedBy = "staffProfile", cascade = CascadeType.ALL)
 	private Set<StaffAuth> staff;
+
+	@OneToMany(mappedBy = "sellerProfile")
+	private Set<ItemInventory> itemInventory;
+
+	@OneToMany(mappedBy = "buyerProfile")
+	private Set<Cart> cartItems;
 
 	public UserProfile() {
 	}
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
-			String addressLine1, String addressLine2, String zipcode, boolean businessProfile, String businessName) {
+			String addressLine1, String addressLine2, String zipcode, boolean sellerProfile,
+			String sellerBusinessName) {
 		super();
 		this.userLogin = userLogin;
 		this.firstName = firstName;
@@ -51,8 +58,8 @@ public @Entity @Data class UserProfile {
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
 		this.zipcode = zipcode;
-		this.businessProfile = businessProfile;
-		this.businessName = businessName;
+		this.sellerProfile = sellerProfile;
+		this.sellerBusinessName = sellerBusinessName;
 	}
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,

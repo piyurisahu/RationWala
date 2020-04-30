@@ -9,20 +9,15 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
-public @Entity @Data class ItemInventory {
+public @Entity @Data class Cart {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private UserProfile sellerProfile;
+	private UserProfile buyerProfile;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private Item item;
+	private ItemInventory itemInventory;
 
-	private double price;
-
-	private int quantity;
-
-	private String unit;
 }

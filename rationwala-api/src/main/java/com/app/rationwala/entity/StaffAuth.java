@@ -17,7 +17,7 @@ public @Entity @Data class StaffAuth {
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private UserProfile businessProfile;
+	private UserProfile sellerProfile;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	private UserProfile staffProfile;
@@ -28,9 +28,9 @@ public @Entity @Data class StaffAuth {
 	public StaffAuth() {
 	}
 
-	public StaffAuth(UserProfile businessProfile, UserProfile staffProfile, String staffAuthType) {
+	public StaffAuth(UserProfile sellerProfile, UserProfile staffProfile, String staffAuthType) {
 		super();
-		this.businessProfile = businessProfile;
+		this.sellerProfile = sellerProfile;
 		this.staffProfile = staffProfile;
 		this.staffAuthType = staffAuthType;
 	}

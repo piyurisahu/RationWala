@@ -12,22 +12,6 @@ public @Data class UserProfile {
 	private String addressLine1;
 	private String addressLine2;
 	private String zipcode;
-
-	public UserProfile() {
-	}
-
-	public UserProfile(ProfilePicture profilePicture, Long userProfileId, String firstName, String lastName,
-			String email, String phoneNumber, String addressLine1, String addressLine2, String zipcode) {
-		super();
-		this.profilePicture = profilePicture;
-		this.userProfileId = userProfileId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.addressLine1 = addressLine1;
-		this.addressLine2 = addressLine2;
-		this.zipcode = zipcode;
-	}
-
+	private boolean sellerProfile;
+	private String sellerBusinessName;
 }

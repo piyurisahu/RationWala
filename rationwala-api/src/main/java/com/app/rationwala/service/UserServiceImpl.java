@@ -84,16 +84,15 @@ public class UserServiceImpl implements UserService {
 		AuthorizeStaffResponse res = new AuthorizeStaffResponse();
 		res.setStatusInfo(new StatusInfo());
 		res.getStatusInfo().setMessages(new ArrayList<>());
-		final UserProfile businessProfile;
+		final UserProfile sellerProfile;
 		try {
-			businessProfile = userProfileRepository.findById(authorizeUserRequest.getBusinessUserProfileId()).get();
-			if (!businessProfile.isBusinessProfile())
+			sellerProfile = userProfileRepository.findById(authorizeUserRequest.getSellerUserProfileId()).get();
+			if (!sellerProfile.isSellerProfile())
 				throw new NoSuchElementException();
 		} catch (NoSuchElementException e) {
 			res.getStatusInfo().setStatus(Status.FAILURE);
-			res.getStatusInfo().getMessages()
-					.add(new Message(Status.ERROR, String.valueOf(authorizeUserRequest.getBusinessUserProfileId()),
-							"ER003", env.getProperty("ER003")));
+			res.getStatusInfo().getMessages().add(new Message(Status.ERROR,
+					String.valueOf(authorizeUserRequest.getSellerUserProfileId()), "ER003", env.getProperty("ER003")));
 			return res;
 		}
 		authorizeUserRequest.getStaffAuthorization().forEach(staffAuthorization -> {
@@ -106,7 +105,7 @@ public class UserServiceImpl implements UserService {
 			UserProfile staffProfile = null;
 			try {
 				staffProfile = userProfileRepository.findById(staffAuthorization.getStaffUserProfileId()).get();
-				if (staffProfile.isBusinessProfile())
+				if (staffProfile.isSellerProfile())
 					throw new NoSuchElementException();
 			} catch (NoSuchElementException e) {
 				res.getStatusInfo().setStatus(Status.FAILURE);
@@ -115,7 +114,7 @@ public class UserServiceImpl implements UserService {
 				return;
 			}
 			staffAuthRepository
-					.save(new StaffAuth(businessProfile, staffProfile, staffAuthorization.getStaffAuthType().name()));
+					.save(new StaffAuth(sellerProfile, staffProfile, staffAuthorization.getStaffAuthType().name()));
 			res.getStatusInfo().setStatus(Status.SUCCESS);
 		});
 
