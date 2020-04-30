@@ -3,6 +3,7 @@ package com.app.rationwala.entity;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,6 +22,7 @@ public @Entity @Data class UserProfile {
 	private UserLogin userLogin;
 	private String firstName;
 	private String lastName;
+	@Column(unique = true)
 	private String email;
 	private String phoneNumber;
 	private String addressLine1;
