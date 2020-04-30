@@ -34,7 +34,6 @@ public class UserController extends AbstractController {
 
 	@PostMapping(value = "login", produces = "application/json")
 	public LoginResponse login(@RequestBody LoginRequest loginRequest) {
-		System.out.println(env.getProperty("warn.exception.occurred"));
 		try {
 			log.debug(mapper.writeValueAsString(loginRequest));
 		} catch (JsonProcessingException e) {
