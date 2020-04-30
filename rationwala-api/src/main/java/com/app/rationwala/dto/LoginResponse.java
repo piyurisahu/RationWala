@@ -1,6 +1,7 @@
 package com.app.rationwala.dto;
 
 import com.app.rationwala.model.LoginCredential;
+import com.app.rationwala.model.StatusInfo;
 import com.app.rationwala.model.UserProfile;
 
 import lombok.Data;

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.app.rationwala.repository.StaffAuthRepository;
 import com.app.rationwala.repository.UserProfileRepository;
 import com.app.rationwala.util.MockDataInDB;
 
@@ -16,9 +17,11 @@ public class RationwalaApiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(UserProfileRepository userProfileRepository) {
+	public CommandLineRunner demo(UserProfileRepository userProfileRepository,
+			StaffAuthRepository staffAuthRepository) {
 		return (args) -> {
 			MockDataInDB.pushUserData(userProfileRepository);
+			MockDataInDB.pushStaffAuthorization(staffAuthRepository);
 		};
 	}
 }

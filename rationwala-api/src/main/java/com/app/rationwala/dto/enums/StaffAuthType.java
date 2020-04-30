@@ -1,5 +1,5 @@
 package com.app.rationwala.dto.enums;
 
-public enum BusinessAuthType {
+public enum StaffAuthType {
 	ADMIN, INVENTORY, DELIVERY
 }

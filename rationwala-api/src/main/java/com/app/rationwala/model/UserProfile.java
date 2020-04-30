@@ -4,6 +4,7 @@ import lombok.Data;
 
 public @Data class UserProfile {
 	private ProfilePicture profilePicture;
+	private Long userProfileId;
 	private String firstName;
 	private String lastName;
 	private String email;
@@ -15,10 +16,11 @@ public @Data class UserProfile {
 	public UserProfile() {
 	}
 
-	public UserProfile(ProfilePicture profilePicture, String firstName, String lastName, String email,
-			String phoneNumber, String addressLine1, String addressLine2, String zipcode) {
+	public UserProfile(ProfilePicture profilePicture, Long userProfileId, String firstName, String lastName,
+			String email, String phoneNumber, String addressLine1, String addressLine2, String zipcode) {
 		super();
 		this.profilePicture = profilePicture;
+		this.userProfileId = userProfileId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;

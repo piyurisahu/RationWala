@@ -32,10 +32,10 @@ public @Entity @Data class UserProfile {
 	private String businessName;
 
 	@OneToMany(mappedBy = "businessProfile")
-	private Set<BusinessAuth> staff;
+	private Set<StaffAuth> businesses;
 
-	@OneToMany(mappedBy = "staff")
-	private Set<BusinessAuth> businesses;
+	@OneToMany(mappedBy = "staffProfile", cascade = CascadeType.ALL)
+	private Set<StaffAuth> staff;
 
 	public UserProfile() {
 	}
@@ -58,6 +58,10 @@ public @Entity @Data class UserProfile {
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
 			String addressLine1, String addressLine2, String zipcode) {
 		this(userLogin, firstName, lastName, email, phoneNumber, addressLine1, addressLine2, zipcode, false, null);
+	}
+
+	public UserProfile(Long id) {
+		this.id = id;
 	}
 
 }

@@ -7,6 +7,8 @@ public class UserProfileModeller extends AbstractModeller {
 		com.app.rationwala.model.UserProfile result = null;
 		if (isNotNull(userProfile)) {
 			result = new com.app.rationwala.model.UserProfile();
+			if (isNotNull(userProfile.getId()))
+				result.setUserProfileId(userProfile.getId());
 			if (isNotNull(userProfile.getFirstName()))
 				result.setFirstName(userProfile.getFirstName());
 			if (isNotNull(userProfile.getLastName()))
@@ -40,15 +42,15 @@ public class UserProfileModeller extends AbstractModeller {
 
 	public Product marshall(com.app.rationwala.entity.Product product) {
 		Product product1 = null;
-		if(isNotNull(product)) {
+		if (isNotNull(product)) {
 			product1 = new Product();
-			if(isNotNull(product.getId()))
+			if (isNotNull(product.getId()))
 				product1.setId(product.getId());
-			if(isNotNull(product.getProductName()))
+			if (isNotNull(product.getProductName()))
 				product1.setProductName(product.getProductName());
-			if(isNotNull(product.getProductDescription()))
+			if (isNotNull(product.getProductDescription()))
 				product1.setProductDescription(product.getProductDescription());
-			if(isNotNull(product.getProductPrice()))
+			if (isNotNull(product.getProductPrice()))
 				product1.setProductPrice(product.getProductPrice());
 		}
 

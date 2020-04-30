@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.rationwala.dto.AuthorizeStaffRequest;
+import com.app.rationwala.dto.AuthorizeStaffResponse;
 import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.dto.LoginResponse;
 import com.app.rationwala.dto.RegisterRequest;
@@ -61,6 +63,25 @@ public class UserController extends AbstractController {
 			res = new ResponseEntity<RegisterResponse>(userService.register(registerRequest), HttpStatus.OK);
 		} catch (JsonProcessingException e) {
 			res = new ResponseEntity<RegisterResponse>(HttpStatus.BAD_REQUEST);
+			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
+			log.error(e.getStackTrace().toString());
+		}
+		return res;
+	}
+
+	@PostMapping(value = "authorize", produces = "application/json")
+	public ResponseEntity<AuthorizeStaffResponse> authorizestaff(
+			@RequestBody AuthorizeStaffRequest authorizeStaffRequest) {
+		ResponseEntity<AuthorizeStaffResponse> res = null;
+		try {
+			log.debug(mapper.writeValueAsString(authorizeStaffRequest));
+			AuthorizeStaffResponse ares = userService.authorizeStaff(authorizeStaffRequest);
+			HttpStatus status = HttpStatus.OK;
+			if (Status.FAILURE.equals(ares.getStatusInfo().getStatus()))
+				status = HttpStatus.NOT_FOUND;
+			res = new ResponseEntity<AuthorizeStaffResponse>(ares, status);
+		} catch (JsonProcessingException e) {
+			res = new ResponseEntity<AuthorizeStaffResponse>(HttpStatus.BAD_REQUEST);
 			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
 			log.error(e.getStackTrace().toString());
 		}
