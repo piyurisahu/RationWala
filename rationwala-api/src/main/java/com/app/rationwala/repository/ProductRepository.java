@@ -1,14 +1,13 @@
 package com.app.rationwala.repository;
 
-import com.app.rationwala.entity.Product;
-import com.app.rationwala.entity.UserLogin;
-import com.app.rationwala.entity.UserProfile;
+import java.util.List;
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import com.app.rationwala.entity.Product;
 
 @Repository
 public interface ProductRepository extends CrudRepository<Product, Long> {

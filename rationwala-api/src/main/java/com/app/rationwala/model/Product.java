@@ -1,8 +1,8 @@
 package com.app.rationwala.model;
 
-import com.app.rationwala.entity.UserLogin;
-
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 public class Product {
 

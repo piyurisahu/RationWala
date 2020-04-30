@@ -12,9 +12,6 @@ import com.app.rationwala.util.MockDataInDB;
 @SpringBootApplication
 public class RationwalaApiApplication {
 
-	// private static final Logger log =
-	// LoggerFactory.getLogger(RationwalaApiApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(RationwalaApiApplication.class, args);
 	}
