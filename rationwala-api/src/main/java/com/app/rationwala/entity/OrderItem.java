@@ -1,7 +1,5 @@
 package com.app.rationwala.entity;
 
-import java.util.Date;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,23 +9,21 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
-public @Entity @Data class Order {
+public @Entity @Data class OrderItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private UserProfile buyerProfile;
+	private ItemInventory itemInventory;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	private ItemInventory itemInventory;
+	private PurchaseOrder purchaseOrder;
 
 	private double price;
 
 	private int quantity;
 
 	private String unit;
-
-	private Date date;
 
 }

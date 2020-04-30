@@ -43,6 +43,9 @@ public @Entity @Data class UserProfile {
 	@OneToMany(mappedBy = "buyerProfile")
 	private Set<Cart> cartItems;
 
+	@OneToMany(mappedBy = "buyerProfile")
+	private Set<PurchaseOrder> ordersMade;
+
 	public UserProfile() {
 	}
 
