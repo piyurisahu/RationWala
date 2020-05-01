@@ -32,10 +32,10 @@ public @Getter @Setter @Entity class UserProfile {
 	private boolean sellerProfile;
 	private String sellerBusinessName;
 
-	@OneToMany(mappedBy = "sellerProfile")
+	@OneToMany(mappedBy = "staffProfile")
 	private Set<StaffAuth> sellerProfiles;
 
-	@OneToMany(mappedBy = "staffProfile", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "sellerProfile")
 	private Set<StaffAuth> staff;
 
 	@OneToMany(mappedBy = "sellerProfile")

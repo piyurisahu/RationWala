@@ -1,5 +1,7 @@
 package com.app.rationwala.model;
 
+import com.app.rationwala.dto.enums.StaffAuthType;
+
 import lombok.Data;
 
 public @Data class UserProfile {
@@ -14,4 +16,5 @@ public @Data class UserProfile {
 	private String zipcode;
 	private boolean sellerProfile;
 	private String sellerBusinessName;
+	private StaffAuthType staffAuthType;
 }

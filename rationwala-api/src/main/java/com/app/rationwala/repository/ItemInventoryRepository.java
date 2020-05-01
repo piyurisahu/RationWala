@@ -2,8 +2,8 @@ package com.app.rationwala.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.app.rationwala.entity.Item;
+import com.app.rationwala.entity.ItemInventory;
 
-public interface ItemInventoryRepository extends CrudRepository<Item, Long> {
+public interface ItemInventoryRepository extends CrudRepository<ItemInventory, Long> {
 
 }

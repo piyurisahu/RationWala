@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.app.rationwala.model.Product;
-import com.app.rationwala.modeller.UserProfileModeller;
+import com.app.rationwala.modeller.ProfileModeller;
 import com.app.rationwala.repository.ProductRepository;
 
 public class ProductServiceImpl implements ProductService {
@@ -14,10 +14,10 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	public ProductRepository productRepository;
 
-	private UserProfileModeller userProfileModeller;
+	private ProfileModeller userProfileModeller;
 
 	public ProductServiceImpl() {
-		userProfileModeller = new UserProfileModeller();
+		userProfileModeller = new ProfileModeller();
 	}
 
 	@Override

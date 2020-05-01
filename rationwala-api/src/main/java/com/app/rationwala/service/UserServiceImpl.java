@@ -18,7 +18,7 @@ import com.app.rationwala.entity.UserLogin;
 import com.app.rationwala.entity.UserProfile;
 import com.app.rationwala.model.Message;
 import com.app.rationwala.model.StatusInfo;
-import com.app.rationwala.modeller.UserProfileModeller;
+import com.app.rationwala.modeller.ProfileModeller;
 import com.app.rationwala.repository.StaffAuthRepository;
 import com.app.rationwala.repository.UserLoginRepository;
 import com.app.rationwala.repository.UserProfileRepository;
@@ -37,10 +37,10 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private StaffAuthRepository staffAuthRepository;
 
-	private UserProfileModeller userProfileModeller;
+	private ProfileModeller profileModeller;
 
 	public UserServiceImpl() {
-		userProfileModeller = new UserProfileModeller();
+		profileModeller = new ProfileModeller();
 	}
 
 	@Override
@@ -60,7 +60,10 @@ public class UserServiceImpl implements UserService {
 			res.getStatusInfo().getMessages().add(new Message("ER002", env.getProperty("ER002")));
 			return res;
 		}
-		res.setUserProfile(userProfileModeller.marshall(userLogin.getUserProfile()));
+		res.setUserProfile(profileModeller.marshallUserProfile(userLogin.getUserProfile()));
+		res.setItemInventoryList(profileModeller.marshallItemInventory(userLogin.getUserProfile().getItemInventory()));
+		res.setStaffProfiles(profileModeller.marshallStaffProfiles(userLogin.getUserProfile().getStaff()));
+		res.setSellerProfiles(profileModeller.marshallSellerProfiles(userLogin.getUserProfile().getSellerProfiles()));
 		res.getStatusInfo().setStatus(Status.SUCCESS);
 		return res;
 	}
@@ -75,7 +78,7 @@ public class UserServiceImpl implements UserService {
 				modelUserProfile.getFirstName(), modelUserProfile.getLastName(), modelUserProfile.getEmail(),
 				modelUserProfile.getPhoneNumber(), modelUserProfile.getAddressLine1(),
 				modelUserProfile.getAddressLine2(), modelUserProfile.getZipcode()));
-		res.setUserProfile(new UserProfileModeller().marshall(resp));
+		res.setUserProfile(new ProfileModeller().marshallUserProfile(resp));
 		return res;
 	}
 
