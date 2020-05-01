@@ -7,9 +7,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-public @Entity @Data class ItemInventory {
+public @Getter @Setter @Entity class ItemInventory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -22,9 +23,22 @@ public @Entity @Data class ItemInventory {
 
 	private String description;
 
-	private double price;
+	private Double price;
 
-	private int quantity;
+	private Integer quantity;
 
 	private String unit;
+
+	public ItemInventory() {
+	}
+
+	public ItemInventory(UserProfile userProfile, Item item, String description, Double price, Integer quantity,
+			String unit) {
+		this.sellerProfile = userProfile;
+		this.item = item;
+		this.description = description;
+		this.price = price;
+		this.quantity = quantity;
+		this.unit = unit;
+	}
 }

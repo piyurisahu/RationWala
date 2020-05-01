@@ -9,9 +9,10 @@ import javax.persistence.ManyToOne;
 
 import com.sun.istack.NotNull;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-public @Entity @Data class StaffAuth {
+public @Getter @Setter @Entity class StaffAuth {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
