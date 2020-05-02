@@ -58,6 +58,8 @@ public class ProfileModeller extends AbstractModeller {
 				product1.setProductDescription(product.getProductDescription());
 			if (isNotNull(product.getProductPrice()))
 				product1.setProductPrice(product.getProductPrice());
+			if (isNotNull(product.isAvailable()))
+				product1.setAvailable(product.isAvailable());
 		}
 
 		return product1;

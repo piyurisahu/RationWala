@@ -60,10 +60,11 @@ public class UserServiceImpl implements UserService {
 			res.getStatusInfo().getMessages().add(new Message("ER002", env.getProperty("ER002")));
 			return res;
 		}
-		res.setUserProfile(profileModeller.marshallUserProfile(userLogin.getUserProfile()));
-		res.setItemInventoryList(profileModeller.marshallItemInventory(userLogin.getUserProfile().getItemInventory()));
-		res.setStaffProfiles(profileModeller.marshallStaffProfiles(userLogin.getUserProfile().getStaff()));
-		res.setSellerProfiles(profileModeller.marshallSellerProfiles(userLogin.getUserProfile().getSellerProfiles()));
+		UserProfile userProfile = userProfileRepository.findByUserId(userLogin);
+		res.setUserProfile(profileModeller.marshallUserProfile(userProfile));
+		res.setItemInventoryList(profileModeller.marshallItemInventory(userProfile.getItemInventory()));
+		res.setStaffProfiles(profileModeller.marshallStaffProfiles(userProfile.getStaff()));
+		res.setSellerProfiles(profileModeller.marshallSellerProfiles(userProfile.getSellerProfiles()));
 		res.getStatusInfo().setStatus(Status.SUCCESS);
 		return res;
 	}
