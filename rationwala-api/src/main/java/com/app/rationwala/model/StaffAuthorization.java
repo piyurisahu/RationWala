@@ -1,4 +1,4 @@
-package com.app.rationwala.dto;
+package com.app.rationwala.model;
 
 import com.app.rationwala.dto.enums.StaffAuthType;
 

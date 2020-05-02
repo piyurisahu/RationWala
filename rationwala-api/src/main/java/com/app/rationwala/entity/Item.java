@@ -31,7 +31,6 @@ public @Getter @Setter @Entity class Item {
 	}
 
 	public Item(Long id) {
-		super();
 		this.id = id;
 	}
 

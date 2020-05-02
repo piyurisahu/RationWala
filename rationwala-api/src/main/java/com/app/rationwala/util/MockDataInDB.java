@@ -6,7 +6,7 @@ import java.util.stream.LongStream;
 import com.app.rationwala.dto.enums.ItemCategoryType;
 import com.app.rationwala.dto.enums.ItemUnitType;
 import com.app.rationwala.dto.enums.StaffAuthType;
-import com.app.rationwala.dto.enums.itemPackageType;
+import com.app.rationwala.dto.enums.ItemPackageType;
 import com.app.rationwala.entity.Item;
 import com.app.rationwala.entity.ItemInventory;
 import com.app.rationwala.entity.StaffAuth;
@@ -47,13 +47,14 @@ public class MockDataInDB {
 
 	public static void pushItem(ItemRepository repo) {
 		IntStream.range(1, 11).forEach(i -> repo.save(new Item("Itemname" + i, "ItemBrand" + i,
-				ItemCategoryType.EATABLE.name(), itemPackageType.BRAND_PACKAGED.name(), "ItemType" + i)));
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType" + i)));
 	}
 
 	public static void pushInventory(ItemInventoryRepository repo) {
 		LongStream.range(1, 11).forEach(i -> {
-			IntStream.range(1, 11).forEach(j -> repo.save(new ItemInventory(new UserProfile(i), new Item(i),
-					"Item seller description", Double.parseDouble(i + ""), j, ItemUnitType.COUNT.name())));
+			IntStream.range(1, 11)
+					.forEach(j -> repo.save(new ItemInventory(new UserProfile(i), new Item(Long.parseLong(j + "")),
+							"Item seller description", Double.parseDouble(i + ""), j, ItemUnitType.COUNT.name())));
 		});
 	}
 }
