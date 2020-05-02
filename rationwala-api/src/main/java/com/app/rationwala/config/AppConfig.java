@@ -1,12 +1,8 @@
 package com.app.rationwala.config;
 
-import com.app.rationwala.service.ProductService;
-import com.app.rationwala.service.ProductServiceImpl;
+import com.app.rationwala.service.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.app.rationwala.service.UserService;
-import com.app.rationwala.service.UserServiceImpl;
 
 @Configuration
 public class AppConfig {
@@ -19,5 +15,10 @@ public class AppConfig {
 	@Bean
 	public ProductService getProductService() {
 		return new ProductServiceImpl();
+	}
+
+	@Bean
+	public TransactionService getTransactionService() {
+		return new TransactionServiceImpl();
 	}
 }

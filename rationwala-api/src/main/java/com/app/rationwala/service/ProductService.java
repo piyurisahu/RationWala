@@ -1,5 +1,7 @@
 package com.app.rationwala.service;
 
+import com.app.rationwala.dto.ListEntity;
+import com.app.rationwala.dto.ProductResponse;
 import com.app.rationwala.model.Product;
 import org.springframework.stereotype.Service;
 
@@ -7,9 +9,9 @@ import java.util.List;
 
 @Service
 public interface ProductService {
-    public Product getProduct(String productId);
+    public ProductResponse getProduct(String productId);
 
-    public List<Product> listProducts();
+    public ListEntity<Product> listProducts();
 
-    public Product addProduct(Product product);
+    public ProductResponse addProduct(Product product);
 }

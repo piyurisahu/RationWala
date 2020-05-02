@@ -19,8 +19,8 @@ public @Getter @Setter @Entity class UserLogin {
 	private String username;
 	private String password;
 
-	@OneToOne(mappedBy = "userLogin")
-	private UserProfile userProfile;
+//	@OneToOne(mappedBy = "userLogin")
+//	private UserProfile userProfile;
 
 	protected UserLogin() {
 	}
