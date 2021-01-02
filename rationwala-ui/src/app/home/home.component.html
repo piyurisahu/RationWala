@@ -1,0 +1,42 @@
+﻿<mat-horizontal-stepper [linear]="isLinear" #stepper (selectionChange)="selectionChange($event)">
+    <mat-step [stepControl]="selectStoreForm" label="Select Store">
+        <form [formGroup]="selectStoreForm">
+            <mat-radio-group [formControl]="ssf.selectStore" required>
+                    <mat-radio-button *ngFor="let store of sellerProfiles" [value]="store.userProfileId">
+                        {{store.$firstName}}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="ssf.selectStore.errors && ssf.selectStore.errors.required">
+                    Please select a store.
+                </mat-error>
+            <div>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup" label="Choose Items">
+        <form [formGroup]="secondFormGroup">
+            <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
+            </mat-form-field>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step label="Review & Place Order">
+        <p>You are now done.</p>
+        <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+    </mat-step>
+</mat-horizontal-stepper>
+
+<div class="p-4">
+    <div class="container">
+        <p><a routerLink="/users">Manage Users</a></p>
+    </div>
+</div>

@@ -4,16 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.app.rationwala.dto.enums.ItemCategoryType;
-import com.app.rationwala.dto.enums.ItemUnitType;
 import com.app.rationwala.dto.enums.StaffAuthType;
-import com.app.rationwala.dto.enums.ItemPackageType;
 import com.app.rationwala.entity.StaffAuth;
 import com.app.rationwala.entity.UserLogin;
-import com.app.rationwala.model.Item;
-import com.app.rationwala.model.ItemInventory;
 import com.app.rationwala.model.LoginCredential;
-import com.app.rationwala.model.Product;
 import com.app.rationwala.model.UserProfile;
 
 public class ProfileModeller extends AbstractModeller {
@@ -44,51 +38,6 @@ public class ProfileModeller extends AbstractModeller {
 			result.setPassword(userLogin.getPassword());
 		}
 		return result;
-	}
-
-	public Product marshall(com.app.rationwala.entity.Product product) {
-		Product product1 = null;
-		if (isNotNull(product)) {
-			product1 = new Product();
-			if (isNotNull(product.getId()))
-				product1.setId(product.getId());
-			if (isNotNull(product.getProductName()))
-				product1.setProductName(product.getProductName());
-			if (isNotNull(product.getProductDescription()))
-				product1.setProductDescription(product.getProductDescription());
-			if (isNotNull(product.getProductPrice()))
-				product1.setProductPrice(product.getProductPrice());
-		}
-
-		return product1;
-	}
-
-	public List<ItemInventory> marshallItemInventory(Set<com.app.rationwala.entity.ItemInventory> itemInvent) {
-		final List<ItemInventory> itemInventoryList;
-		if (isNotNull(itemInvent) && !itemInvent.isEmpty()) {
-			itemInventoryList = new ArrayList<>();
-			itemInvent.forEach(itemInv -> {
-				ItemInventory itemInventory = new ItemInventory();
-				itemInventory.setDescription(itemInv.getDescription());
-				itemInventory.setPrice(itemInv.getPrice());
-				itemInventory.setQuantity(itemInv.getQuantity());
-				itemInventory.setUnit(ItemUnitType.valueOf(itemInv.getUnit()));
-				if (isNotNull(itemInv.getItem())) {
-					itemInventory.setItem(new Item());
-					itemInventory.getItem().setItemId(itemInv.getItem().getId());
-					itemInventory.getItem().setItemBrand(itemInv.getItem().getItemBrand());
-					itemInventory.getItem()
-							.setItemCategory(ItemCategoryType.valueOf(itemInv.getItem().getItemCategory()));
-					itemInventory.getItem().setItemName(itemInv.getItem().getItemName());
-					itemInventory.getItem().setItemType(itemInv.getItem().getItemType());
-					itemInventory.getItem().setPackageType(ItemPackageType.valueOf(itemInv.getItem().getPackageType()));
-				}
-				itemInventoryList.add(itemInventory);
-			});
-		} else {
-			itemInventoryList = null;
-		}
-		return itemInventoryList;
 	}
 
 	public List<UserProfile> marshallStaffProfiles(Set<StaffAuth> staffSet) {

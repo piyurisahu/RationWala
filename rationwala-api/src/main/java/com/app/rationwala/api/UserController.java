@@ -9,15 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.rationwala.dto.AuthorizeStaffRequest;
-import com.app.rationwala.dto.AuthorizeStaffResponse;
-import com.app.rationwala.dto.LoginRequest;
-import com.app.rationwala.dto.LoginResponse;
-import com.app.rationwala.dto.RegisterRequest;
-import com.app.rationwala.dto.RegisterResponse;
+import com.app.rationwala.dto.GetAllSellersRequest;
+import com.app.rationwala.dto.GetAllSellersResponse;
 import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.UserService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -36,52 +31,18 @@ public class UserController extends AbstractController {
 	public String index() {
 		return "Please go to user methods";
 	}
-
-	@PostMapping(value = "login", produces = "application/json")
-	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-		ResponseEntity<LoginResponse> res = null;
+	
+	@PostMapping(value = "seller/all", produces = "application/json")
+	public ResponseEntity<GetAllSellersResponse> getAllSellers(@RequestBody GetAllSellersRequest getAllSellersRequest) {
+		ResponseEntity<GetAllSellersResponse> res = null;
 		try {
-			log.debug(mapper.writeValueAsString(loginRequest));
-			LoginResponse lres = userService.login(loginRequest);
+			GetAllSellersResponse gres = userService.getAllSellers(null);
 			HttpStatus status = HttpStatus.OK;
-			if (Status.FAILURE.equals(lres.getStatusInfo().getStatus()))
+			if (Status.FAILURE.equals(gres.getStatusInfo().getStatus()))
 				status = HttpStatus.NOT_FOUND;
-			res = new ResponseEntity<LoginResponse>(userService.login(loginRequest), status);
-		} catch (JsonProcessingException e) {
-			res = new ResponseEntity<LoginResponse>(HttpStatus.BAD_REQUEST);
-			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
-			log.error(e.getStackTrace().toString());
-		}
-		return res;
-	}
-
-	@PostMapping(value = "register", produces = "application/json")
-	public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
-		ResponseEntity<RegisterResponse> res = null;
-		try {
-			log.debug(mapper.writeValueAsString(registerRequest));
-			res = new ResponseEntity<RegisterResponse>(userService.register(registerRequest), HttpStatus.OK);
-		} catch (JsonProcessingException e) {
-			res = new ResponseEntity<RegisterResponse>(HttpStatus.BAD_REQUEST);
-			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
-			log.error(e.getStackTrace().toString());
-		}
-		return res;
-	}
-
-	@PostMapping(value = "authorize", produces = "application/json")
-	public ResponseEntity<AuthorizeStaffResponse> authorizestaff(
-			@RequestBody AuthorizeStaffRequest authorizeStaffRequest) {
-		ResponseEntity<AuthorizeStaffResponse> res = null;
-		try {
-			log.debug(mapper.writeValueAsString(authorizeStaffRequest));
-			AuthorizeStaffResponse ares = userService.authorizeStaff(authorizeStaffRequest);
-			HttpStatus status = HttpStatus.OK;
-			if (Status.FAILURE.equals(ares.getStatusInfo().getStatus()))
-				status = HttpStatus.NOT_FOUND;
-			res = new ResponseEntity<AuthorizeStaffResponse>(ares, status);
-		} catch (JsonProcessingException e) {
-			res = new ResponseEntity<AuthorizeStaffResponse>(HttpStatus.BAD_REQUEST);
+			res = new ResponseEntity<GetAllSellersResponse>(gres, status);
+		} catch (Exception e) {
+			res = new ResponseEntity<GetAllSellersResponse>(HttpStatus.BAD_REQUEST);
 			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
 			log.error(e.getStackTrace().toString());
 		}
