@@ -8,6 +8,7 @@ import { LoginResponse } from './_services/dto/login-response';
 export class AppComponent {
     isLoggedIn = false;
     loginResponse: LoginResponse;
+    cartCount:number = 0;
     constructor(private accountService: AccountService) {
         this.accountService.login.subscribe(x => {
             this.loginResponse = x;
@@ -15,6 +16,23 @@ export class AppComponent {
 
         });
     }
+
+    /**
+     * Getter $cartCount
+     * @return {number }
+     */
+	public get $cartCount(): number  {
+		return this.cartCount;
+	}
+
+    /**
+     * Setter $cartCount
+     * @param {number } value
+     */
+	public set $cartCount(value: number ) {
+		this.cartCount = value;
+	}
+
     logout() {
         this.accountService.logout();
     }

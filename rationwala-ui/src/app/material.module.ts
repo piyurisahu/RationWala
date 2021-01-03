@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from "@angular/core";
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSortModule } from '@angular/material/sort';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -17,6 +20,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSortModule,
+    MatBadgeModule,
     MatCardModule,
     MatInputModule,
     MatDialogModule,
@@ -24,6 +29,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatIconModule,
     MatRadioModule,
+    MatPaginatorModule,
     MatSidenavModule,
     MatStepperModule,
     MatProgressSpinnerModule
@@ -32,6 +38,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     CommonModule,
     MatToolbarModule,
     MatButtonModule,
+    MatSortModule,
+    MatBadgeModule,
     MatCardModule,
     MatInputModule,
     MatDialogModule,
@@ -39,6 +47,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatMenuModule,
     MatIconModule,
     MatRadioModule,
+    MatPaginatorModule,
     MatSidenavModule,
     MatStepperModule,
     MatProgressSpinnerModule

@@ -10,7 +10,7 @@
         <button mat-button fxShow="true" fxHide.lt-md="true">About</button>
         <button mat-button fxShow="true" fxHide.lt-md="true">Contact</button>
         <button *ngIf="isLoggedIn" mat-button>
-            <mat-icon>shopping_cart</mat-icon>
+            <mat-icon matBadge="{{cartCount}}" matBadgeColor="accent" [matBadgeHidden]="cartCount ==0">shopping_cart</mat-icon>
         </button>
         <button *ngIf="isLoggedIn" mat-button [matMenuTriggerFor]="menu" >
             <span>Hi, {{loginResponse.$userProfile.$firstName}}</span>

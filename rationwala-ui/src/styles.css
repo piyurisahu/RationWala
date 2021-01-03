@@ -14,3 +14,28 @@ mat-card {
 .full-width{
   width:100%;
 }
+
+table {
+  width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  display: none;
+}
+
+.mat-sort-header-container{
+  justify-content: center;
+}
+mat-radio-button label{
+  height:15em !important;
+  width:15em !important;
+  border: 1px solid white;
+  border-radius: 5%;
+  padding:1em;
+  align-items: flex-end !important;
+  background-size: 15em 15em;
+}
+mat-radio-button label:hover{
+  border-color: #3f51b5;
+}

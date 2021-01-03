@@ -2,15 +2,13 @@ export class Item{
     private itemId:number;
 	private itemName:string;
 	private itemBrand:string;
-	private itemCategory:ItemCategoryType;
-	private packageType:ItemPackageType;
+	private itemCategory:string;
+	private packageType:string;
 	private itemType:string;
 
     public deserialize(o: Object): Item{
         if(!o)return;
         Object.assign(this, o);
-        this.$itemCategory = ItemCategoryType[this.$itemCategory as unknown as keyof typeof ItemCategoryType]
-        this.$packageType = ItemPackageType[this.$packageType as unknown as keyof typeof ItemPackageType]
         return this;
     }
 
@@ -40,17 +38,17 @@ export class Item{
 
     /**
      * Getter $itemCategory
-     * @return {ItemCategoryType}
+     * @return {string}
      */
-	public get $itemCategory(): ItemCategoryType {
+	public get $itemCategory(): string {
 		return this.itemCategory;
 	}
 
     /**
      * Getter $packageType
-     * @return {ItemPackageType}
+     * @return {string}
      */
-	public get $packageType(): ItemPackageType {
+	public get $packageType(): string {
 		return this.packageType;
 	}
 
@@ -88,17 +86,17 @@ export class Item{
 
     /**
      * Setter $itemCategory
-     * @param {ItemCategoryType} value
+     * @param {string} value
      */
-	public set $itemCategory(value: ItemCategoryType) {
+	public set $itemCategory(value: string) {
 		this.itemCategory = value;
 	}
 
     /**
      * Setter $packageType
-     * @param {ItemPackageType} value
+     * @param {string} value
      */
-	public set $packageType(value: ItemPackageType) {
+	public set $packageType(value: string) {
 		this.packageType = value;
 	}
 
@@ -110,11 +108,4 @@ export class Item{
 		this.itemType = value;
 	}
 
-}
-export enum ItemCategoryType{
-    ELECTRONIC, COSMETIC, EATABLE
-}
-
-export enum ItemPackageType{
-    BRAND_PACKAGED, SELF_PACKAGED, LOOSE
 }

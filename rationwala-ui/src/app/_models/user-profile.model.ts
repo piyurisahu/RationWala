@@ -1,3 +1,5 @@
+import { ProfilePicture } from "./profile-picture";
+
 export class UserProfile {
     private profilePicture:ProfilePicture;
 	private userProfileId:number;
@@ -214,12 +216,4 @@ export class UserProfile {
 }
 export enum StaffAuthType {
     ADMIN, INVENTORY, DELIVERY
-}
-export class ProfilePicture{
-    
-    public deserialize(o: Object): ProfilePicture{
-        if(!o)return;
-        Object.assign(this, o);
-        return this;
-    }
 }

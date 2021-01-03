@@ -4,14 +4,15 @@ export class ItemInventory{
     private item:Item;
 	private description:string;
 	private price:number;
-	private quantity:number;
-    private unit:ItemUnitType;
+    private countInStock:number;
+    private quantity:number;
+    private orderCount:number;
+    private unit:string;
 
     public deserialize(o: Object): ItemInventory{
         if(!o)return;
         Object.assign(this, o);
         this.$item = new Item().deserialize(this.$item);
-        this.$unit = ItemUnitType[this.$unit as unknown as keyof typeof ItemUnitType]
         return this;
     }
 
@@ -40,6 +41,14 @@ export class ItemInventory{
 	}
 
     /**
+     * Getter $countInStock
+     * @return {number}
+     */
+	public get $countInStock(): number {
+		return this.countInStock;
+	}
+
+    /**
      * Getter $quantity
      * @return {number}
      */
@@ -48,10 +57,18 @@ export class ItemInventory{
 	}
 
     /**
-     * Getter $unit
-     * @return {ItemUnitType}
+     * Getter $orderCount
+     * @return {number}
      */
-	public get $unit(): ItemUnitType {
+	public get $orderCount(): number {
+		return this.orderCount;
+	}
+
+    /**
+     * Getter $unit
+     * @return {string}
+     */
+	public get $unit(): string {
 		return this.unit;
 	}
 
@@ -80,6 +97,14 @@ export class ItemInventory{
 	}
 
     /**
+     * Setter $countInStock
+     * @param {number} value
+     */
+	public set $countInStock(value: number) {
+		this.countInStock = value;
+	}
+
+    /**
      * Setter $quantity
      * @param {number} value
      */
@@ -88,14 +113,19 @@ export class ItemInventory{
 	}
 
     /**
-     * Setter $unit
-     * @param {ItemUnitType} value
+     * Setter $orderCount
+     * @param {number} value
      */
-	public set $unit(value: ItemUnitType) {
-		this.unit = value;
+	public set $orderCount(value: number) {
+		this.orderCount = value;
 	}
+
+    /**
+     * Setter $unit
+     * @param {string} value
+     */
+	public set $unit(value: string) {
+		this.unit = value;
+	} 
     
-}
-export enum ItemUnitType{
-    KILO_GRAM, LITER, COUNT
 }

@@ -1,28 +1,76 @@
-﻿<mat-horizontal-stepper [linear]="isLinear" #stepper (selectionChange)="selectionChange($event)">
+﻿<div class="align-middle text-center h3 m-3 h-25">{{selectedShop}}</div>
+<mat-horizontal-stepper [linear]="isLinear" #stepper (selectionChange)="selectionChange($event)">
     <mat-step [stepControl]="selectStoreForm" label="Select Store">
         <form [formGroup]="selectStoreForm">
-            <mat-radio-group [formControl]="ssf.selectStore" required>
-                    <mat-radio-button *ngFor="let store of sellerProfiles" [value]="store.userProfileId">
-                        {{store.$firstName}}
-                    </mat-radio-button>
-                </mat-radio-group>
-                <mat-error *ngIf="ssf.selectStore.errors && ssf.selectStore.errors.required">
-                    Please select a store.
-                </mat-error>
-            <div>
-                <button mat-button matStepperNext>Next</button>
+            <mat-radio-group [formControl]="ssf.selectStore" fxLayout="row" fxLayout="row wrap" fxLayoutGap="32px">
+                <mat-radio-button *ngFor="let store of sellerProfiles" [value]="store.userProfileId" (change)="radioChange($event)" 
+                    style="background-image: url('https://cdn2.vectorstock.com/i/thumb-large/37/56/shopping-logo-design-concept-template-vector-25543756.jpg');">
+                    {{store.sellerBusinessName}}
+                </mat-radio-button>
+                <br/>
+            </mat-radio-group>
+            <div class="text-center m-3">
+                <button *ngIf="ssf.selectStore.value" mat-raised-button matStepperNext color="primary">Next</button>
             </div>
         </form>
     </mat-step>
-    <mat-step [stepControl]="secondFormGroup" label="Choose Items">
-        <form [formGroup]="secondFormGroup">
-            <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY" required>
-            </mat-form-field>
-            <div>
+    <mat-step [stepControl]="selectItemForm" label="Choose Items">
+        <form [formGroup]="selectItemForm">
+            <table mat-table [dataSource]="selectItemdataSource" class="mat-elevation-z8" matSort>
+                <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="main">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Item name</th>
+                    <td mat-cell *matCellDef="let element">{{element.main}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="desc">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+                    <td mat-cell *matCellDef="let element"> {{element.itemInventory.description}} </td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef>Quantity</th>
+                    <td class="text-center" mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="price">
+                    <th class="text-center"  mat-header-cell *matHeaderCellDef mat-sort-header> Price ₹</th>
+                    <td class="text-center"  mat-cell *matCellDef="let element"> {{element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="action">
+                    <th mat-header-cell *matHeaderCellDef></th>
+                    <td class="text-center" mat-cell *matCellDef="let element">
+                        <button *ngIf="element.count == 0" mat-button color="primary" (click)="addToCart(element)">Add
+                            to Cart</button>
+                        <mat-form-field *ngIf="element.count != 0" class="counter">
+                            <button mat-icon-button matPrefix aria-label="Remove"
+                                (click)="incrementValue(-_step, element)" [disabled]="shouldDisableDecrement(element)">
+                                <mat-icon>remove</mat-icon>
+                            </button>
+                            <input matInput type="number" [readonly]="true" value="{{element.count}}"
+                                (focus)="setColor('primary')" (blur)="setColor('default')" />
+                            <button mat-icon-button matSuffix aria-label="Add" (click)="incrementValue(_step, element)"
+                                [disabled]="shouldDisableIncrement(element)">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </mat-form-field>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]"></mat-paginator>
+            <div class="text-center m-3">
                 <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
+                <button *ngIf="cartCount != 0" mat-raised-button matStepperNext color="primary">Next</button>
             </div>
         </form>
     </mat-step>
@@ -34,9 +82,3 @@
         </div>
     </mat-step>
 </mat-horizontal-stepper>
-
-<div class="p-4">
-    <div class="container">
-        <p><a routerLink="/users">Manage Users</a></p>
-    </div>
-</div>

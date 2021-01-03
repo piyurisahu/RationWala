@@ -1,21 +1,20 @@
 
 export class StatusInfo{
-    private status:Status;
+    private string:string;
     private messages: Message[];
 
     public deserialize(o: Object): StatusInfo{
         if(!o)return;
         Object.assign(this, o);
-        this.$status = Status[this.$status as unknown as keyof typeof Status]
         return this;
     }
 
     /**
-     * Getter $status
-     * @return {Status}
+     * Getter $string
+     * @return {string}
      */
-	public get $status(): Status {
-		return this.status;
+	public get $string(): string {
+		return this.string;
 	}
 
     /**
@@ -27,11 +26,11 @@ export class StatusInfo{
 	}
 
     /**
-     * Setter $status
-     * @param {Status} value
+     * Setter $string
+     * @param {string} value
      */
-	public set $status(value: Status) {
-		this.status = value;
+	public set $string(value: string) {
+		this.string = value;
 	}
 
     /**
@@ -43,28 +42,25 @@ export class StatusInfo{
 	}
     
 }
-export enum Status{
-    SUCCESS, ERROR, FAILUR
-}
 
 export class Message{
-    private status:Status;
+    private string:string;
 	private identifier:string;
 	private code:string;
     private message:string;
 
     public deserialize(o: Object): Message{
+        if(!o)return;
         Object.assign(this, o);
-        this.$status = Status[JSON.stringify(this.$status)];
         return this;
     }
 
     /**
-     * Getter $status
-     * @return {Status}
+     * Getter $string
+     * @return {string}
      */
-	public get $status(): Status {
-		return this.status;
+	public get $string(): string {
+		return this.string;
 	}
 
     /**
@@ -92,11 +88,11 @@ export class Message{
 	}
 
     /**
-     * Setter $status
-     * @param {Status} value
+     * Setter $string
+     * @param {string} value
      */
-	public set $status(value: Status) {
-		this.status = value;
+	public set $string(value: string) {
+		this.string = value;
 	}
 
     /**
