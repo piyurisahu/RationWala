@@ -3,11 +3,12 @@
     <mat-step [stepControl]="selectStoreForm" label="Select Store">
         <form [formGroup]="selectStoreForm">
             <mat-radio-group [formControl]="ssf.selectStore" fxLayout="row" fxLayout="row wrap" fxLayoutGap="32px">
-                <mat-radio-button *ngFor="let store of sellerProfiles" [value]="store.userProfileId" (change)="radioChange($event)" 
-                    style="background-image: url('https://cdn2.vectorstock.com/i/thumb-large/37/56/shopping-logo-design-concept-template-vector-25543756.jpg');">
+                <mat-radio-button *ngFor="let store of sellerProfiles" [value]="store.userProfileId"
+                    (change)="radioChange($event)"
+                    style="background-image: url('{{store.profilePicture.sellerLogoUrl}}');">
                     {{store.sellerBusinessName}}
                 </mat-radio-button>
-                <br/>
+                <br />
             </mat-radio-group>
             <div class="text-center m-3">
                 <button *ngIf="ssf.selectStore.value" mat-raised-button matStepperNext color="primary">Next</button>
@@ -40,8 +41,8 @@
 
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="price">
-                    <th class="text-center"  mat-header-cell *matHeaderCellDef mat-sort-header> Price ₹</th>
-                    <td class="text-center"  mat-cell *matCellDef="let element"> {{element.price}} </td>
+                    <th class="text-center" mat-header-cell *matHeaderCellDef mat-sort-header> Price ₹</th>
+                    <td class="text-center" mat-cell *matCellDef="let element"> {{element.price}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="action">
