@@ -7,7 +7,9 @@ import lombok.Data;
 public @Data class ItemInventory {
 	private Item item;
 	private String description;
-	private Double price;
-	private Integer quantity;
+	private double price;
+	private int countInStock;
+	private int quantity;
+	private int orderCount;
 	private ItemUnitType unit;
 }

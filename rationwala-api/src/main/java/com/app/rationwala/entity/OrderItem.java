@@ -23,8 +23,19 @@ public @Getter @Setter @Entity class OrderItem {
 
 	private double price;
 
-	private int quantity;
+	private int orderCount;
+	
+	public OrderItem(ItemInventory itemInventory, PurchaseOrder purchaseOrder, double price,
+			int orderCount) {
+		this.itemInventory = itemInventory;
+		this.purchaseOrder = purchaseOrder;
+		this.price = price;
+		this.orderCount = orderCount;
+	}
 
-	private String unit;
+	public OrderItem(com.app.rationwala.model.ItemInventory itemInventory2, PurchaseOrder po, double price2,
+			int orderCount2) {
+		// TODO Auto-generated constructor stub
+	}
 
 }

@@ -1,5 +1,8 @@
 package com.app.rationwala.service;
 
-public interface OrderService {
+import com.app.rationwala.dto.PlaceOrderRequest;
+import com.app.rationwala.dto.PlaceOrderResponse;
 
+public interface OrderService {
+	public PlaceOrderResponse placeOrder(PlaceOrderRequest placeOrderRequest);
 }

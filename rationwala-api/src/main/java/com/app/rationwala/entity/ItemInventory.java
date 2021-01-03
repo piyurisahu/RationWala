@@ -25,6 +25,8 @@ public @Getter @Setter @Entity class ItemInventory {
 
 	private Double price;
 
+	private Integer countInStock;
+
 	private Integer quantity;
 
 	private String unit;
@@ -32,12 +34,13 @@ public @Getter @Setter @Entity class ItemInventory {
 	public ItemInventory() {
 	}
 
-	public ItemInventory(UserProfile userProfile, Item item, String description, Double price, Integer quantity,
-			String unit) {
+	public ItemInventory(UserProfile userProfile, Item item, String description, Double price, Integer countInStock,
+			Integer quantity, String unit) {
 		this.sellerProfile = userProfile;
 		this.item = item;
 		this.description = description;
 		this.price = price;
+		this.countInStock = countInStock;
 		this.quantity = quantity;
 		this.unit = unit;
 	}

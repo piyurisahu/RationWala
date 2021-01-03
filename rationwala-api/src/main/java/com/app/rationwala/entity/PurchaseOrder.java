@@ -28,4 +28,10 @@ public @Getter @Setter @Entity class PurchaseOrder {
 	private double totalPrice;
 
 	private Date purchaseDate;
+
+	public PurchaseOrder(UserProfile buyerProfile, double totalPrice, Date date) {
+		this.buyerProfile = buyerProfile;
+		this.totalPrice = totalPrice;
+		this.purchaseDate = date;
+	}
 }

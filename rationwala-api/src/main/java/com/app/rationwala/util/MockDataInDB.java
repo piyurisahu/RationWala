@@ -132,7 +132,7 @@ public class MockDataInDB {
 		LongStream.range(1, 11).forEach(i -> {
 			IntStream.range(1, 11)
 					.forEach(j -> repo.save(new ItemInventory(new UserProfile(i), new Item(Long.parseLong(j + "")),
-							"Item seller description", Double.parseDouble(i + ""), j, ItemUnitType.COUNT.name())));
+							"Item seller description", Double.parseDouble(i + ""), j, j, ItemUnitType.COUNT.name())));
 		});
 	}
 }
