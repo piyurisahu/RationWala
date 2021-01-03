@@ -91,8 +91,41 @@ public class MockDataInDB {
 
 	public static void pushItem(ItemRepository repo) {
 
-		IntStream.range(1, 11).forEach(i -> repo.save(new Item("Itemname" + i, "ItemBrand" + i,
-				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType" + i)));
+		repo.save(new Item("Coconut Oil", "O'range",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Water Bottle", "Bislery",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Coconut Oil", "O'range",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Chakki Atta", "Ashirvaad",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Salt", "Tata",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Mustard Oil", "Fortune",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Hinge", "Catch Compounded",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Moong Dal", "Family Farm",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Pure Ghee", "Amul",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Munch", "Nestle",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Basmati Rice", "Kohinoor Royal",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Maggi Masala Magic", "Maggi",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Chyawanprash", "Dabur",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Rajma", "Chithra",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Magic Masala", "Sunfeast",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Green chilly Chutney", "Pravin",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		repo.save(new Item("Green Chilly Chutney", "Food Art Factory",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+
 	}
 
 	public static void pushInventory(ItemInventoryRepository repo) {
