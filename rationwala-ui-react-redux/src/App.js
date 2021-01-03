@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, Route, Switch } from "react-router-dom";
-import { increment } from "./_redux/actions";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { Router } from "./Router";
+import "bootstrap/dist/css/bootstrap.min.css";
+import NavBar from "./components/NavBar"
+import Footer from "./components/Footer"
 
 // const countera = useSelector((state) => state.counter);
 // const isLogged = useSelector((state) => state.isLogged);
@@ -22,9 +23,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Hello</h1>
-
+        <NavBar/>
         <Router props={this.props} />
+        {/* <Footer /> */}
       </div>
     );
   }

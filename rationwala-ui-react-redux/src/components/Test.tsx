@@ -4,8 +4,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import { history } from "../_redux/helpers/history";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "./../_redux/actions/index";
-import { userLogin } from "../_redux/actions/actionConstant";
+import { userLogin } from "../_redux/actions/auth.action";
 
 export const Test = (props) => {
   const dispatch = useDispatch();
@@ -17,9 +16,7 @@ export const Test = (props) => {
 
   const callApi = () => {
     dispatch(userLogin("1", "2")).then((res) => {
-      
       console.log(user);
-      debugger;
     });
     // axios
     //   .request({

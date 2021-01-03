@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import { store } from "./_redux/helpers/store";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "./_redux/helpers/history";
+import "../src/styles/login.css";
 
 ReactDOM.render(
   <Provider store={store}>
