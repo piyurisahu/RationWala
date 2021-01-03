@@ -34,7 +34,7 @@ public class MockDataInDB {
 		repo.save(new UserProfile(new UserLogin("Seller3", "admin"), "Vikas",
 				"Malik", "vikasM@abc.com" , "9484987654", "55 Shaheed ChandraShekhar Chowk",
 				"Gomti Nagar, Lucknow", "226010", true, "Mr brown Ration Mall",
-				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjMnam8IlGxLPKbwkX-Zw9hCoWdpZow3uDUw&usqp=CAU"));
+				"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTxr950m8b7rsKm7HzstqoU-TckkPXH3pS4A&usqp=CAU"));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller4", "admin"), "Tanushree",
