@@ -28,8 +28,8 @@ public class RationwalaApiApplication {
 		return (args) -> {
 			MockDataInDB.pushUserData(upr);
 			MockDataInDB.pushStaffAuthorization(sar);
-			MockDataInDB.pushItem(ir);
-			MockDataInDB.pushInventory(iir);
+			MockDataInDB.pushItem(ir, iir);
+//			MockDataInDB.pushInventory(iir);
 		};
 	}
 	

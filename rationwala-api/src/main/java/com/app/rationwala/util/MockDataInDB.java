@@ -100,50 +100,93 @@ public class MockDataInDB {
 				.save(new StaffAuth(new UserProfile(1L), new UserProfile(21L), StaffAuthType.INVENTORY.name()));
 	}
 
-	public static void pushItem(ItemRepository repo) {
+	public static void pushItem(ItemRepository repo, ItemInventoryRepository itemInventoryRepository) {
+		Item item ;
+		item = repo.save(new Item("Coconut Oil", "O'range",
+				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 219.0, 20, 500,
+				ItemUnitType.ML.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 250.0, 10, 600, ItemUnitType.ML.toString());
 
-		repo.save(new Item("Coconut Oil", "O'range",
+		item = repo.save(new Item("Water Bottle", "Bisleri",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Water Bottle", "Bislery",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 10.0, 800, 500, ItemUnitType.ML.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 30.0, 500, 2, ItemUnitType.LITER.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 80.0, 100, 20, ItemUnitType.LITER.toString());
+
+
+		item = repo.save(new Item("Chakki Atta", "Ashirvaad",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Coconut Oil", "O'range",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 206.0, 40, 5, ItemUnitType.KILO_GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 51.0, 100, 1, ItemUnitType.KILO_GRAM.toString());
+
+		item  = repo.save(new Item("Salt", "Tata",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Chakki Atta", "Ashirvaad",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 40.0, 200, 1, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Mustard Oil", "Fortune",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Salt", "Tata",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 733.0, 40, 5, ItemUnitType.LITER.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 170.0, 80, 1, ItemUnitType.LITER.toString());
+
+		item = repo.save(new Item("Hing", "Patanjali",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Mustard Oil", "Fortune",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 40.0, 100, 25, ItemUnitType.GRAM.toString());
+
+		item = repo.save(new Item("Moong Dal", "Family Farm",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Hinge", "Catch Compounded",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 160.0, 40, 1, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Pure Ghee", "Amul",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Moong Dal", "Family Farm",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 500.0, 90, 1, ItemUnitType.LITER.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 275.0, 200, 500, ItemUnitType.ML.toString());
+
+		item = repo.save(new Item("Munch", "Nestle",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Pure Ghee", "Amul",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 20.0, 1000, 35,ItemUnitType.GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 100.0, 500, 222, ItemUnitType.GRAM.toString());
+
+		item = repo.save(new Item("Basmati Rice", "Kohinoor Royal",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Munch", "Nestle",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 98.0, 100, 1, ItemUnitType.KILO_GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 348.0, 100, 5, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Maggi Masala Magic", "Maggi",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Basmati Rice", "Kohinoor Royal",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 52.0, 300, 72, ItemUnitType.GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 10.0, 500, 12, ItemUnitType.GRAM.toString());
+
+		item = repo.save(new Item("Chyawanprash", "Dabur",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Maggi Masala Magic", "Maggi",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 323.0, 100, 1, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Rajma", "Chithra",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Chyawanprash", "Dabur",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 120.0, 50, 1, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Magic Masala", "Sunfeast",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Rajma", "Chithra",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 50.0, 400, 72, ItemUnitType.GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 12.0, 500, 15, ItemUnitType.GRAM.toString());
+
+		item = repo.save(new Item("Green chilly Chutney", "Pravin",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Magic Masala", "Sunfeast",
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 125.0, 150, 210, ItemUnitType.KILO_GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 70.0, 100, 100, ItemUnitType.KILO_GRAM.toString());
+
+		item = repo.save(new Item("Green Chilly Chutney", "Food Art Factory",
 				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Green chilly Chutney", "Pravin",
-				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
-		repo.save(new Item("Green Chilly Chutney", "Food Art Factory",
-				ItemCategoryType.EATABLE.name(), ItemPackageType.BRAND_PACKAGED.name(), "ItemType"));
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 140.0, 200, 250, ItemUnitType.KILO_GRAM.toString());
+		MockDataDB2.pushInventoryData(itemInventoryRepository, item, 40.0, 600, 50, ItemUnitType.KILO_GRAM.toString());
 
 	}
 
-	public static void pushInventory(ItemInventoryRepository repo) {
-		LongStream.range(1, 11).forEach(i -> {
-			IntStream.range(1, 11)
-					.forEach(j -> repo.save(new ItemInventory(new UserProfile(i), new Item(Long.parseLong(j + "")),
-							"Item seller description", Double.parseDouble(i + ""), j, j, ItemUnitType.COUNT.name())));
-		});
-	}
+//	public static void pushInventory(ItemInventoryRepository repo) {
+//		LongStream.range(1, 11).forEach(i -> {
+//			IntStream.range(1, 11)
+//					.forEach(j -> repo.save(new ItemInventory(new UserProfile(i), new Item(Long.parseLong(j + "")),
+//							"Item seller description", Double.parseDouble(i + ""), j, j, ItemUnitType.COUNT.name())));
+//		});
+//	}
 }
