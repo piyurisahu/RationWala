@@ -9,11 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.rationwala.dto.GetSellerInventoryRequest;
-import com.app.rationwala.dto.GetSellerInventoryResponse;
 import com.app.rationwala.dto.PlaceOrderRequest;
 import com.app.rationwala.dto.PlaceOrderResponse;
-import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.OrderService;
 
 import lombok.extern.slf4j.Slf4j;

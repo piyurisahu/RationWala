@@ -23,52 +23,52 @@ public class MockDataInDB {
 		// Seller profiles
 		repo.save(new UserProfile(new UserLogin("Seller1", "admin"), "Tarun",
 				"Gupta", "tarung@abc.com" , "9494942354", "XYZ Gomti Nagar",
-				"Lucknow", "12345", true, "Gupta General Store"));
+				"Lucknow", "12345", true, "Gupta General Store", ""));
 
 		repo.save(new UserProfile(new UserLogin("Seller2", "admin"), "Kiran",
 				"Arora", "kirana@abc.com" , "9494987654", "5/7 Vinay Khand",
-				"Lucknow", "12365", true, "Arora Departmental Store"));
+				"Lucknow", "12365", true, "Arora Departmental Store", ""));
 
 		repo.save(new UserProfile(new UserLogin("Seller3", "admin"), "Vikas",
 				"Malik", "vikasM@abc.com" , "9484987654", "55 Shaheed ChandraShekhar Chowk",
-				"Gomti Nagar, Lucknow", "226010", true, "Mr brown Ration Mall"));
+				"Gomti Nagar, Lucknow", "226010", true, "Mr brown Ration Mall", ""));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller4", "admin"), "Tanushree",
 				"Gupta", "TanuSh@abc.com" , "9484987772", "67/5 Indira Nagar ",
-				"Sector 14, Lucknow", "226011", true, "1 Stop Grocery"));
+				"Sector 14, Lucknow", "226011", true, "1 Stop Grocery", ""));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller5", "admin"), "Sonu",
 				"Khan", "SonuK@abc.com" , "9484828200", "Shop no 123, metro Plaza",
-				"Metro station, Lucknow", "226016", true, "EveryDay Mart "));
+				"Metro station, Lucknow", "226016", true, "EveryDay Mart ", ""));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller6", "admin"), "Rakesh",
 				"Yadav", "rakeshY@abc.com" , "9484828772", "C-1/2, Sahara State Road",
-				"Sector G, Lucknow", "226021", true, "GrocerSpace "));
+				"Sector G, Lucknow", "226021", true, "GrocerSpace ", ""));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller7", "admin"), "Raman",
 				"Sahu", "ramanS@abc.com" , "9484833772", "6/9, Nayak Nagar",
-				"Sitapur Road, Lucknow", "226021", true, "Day to Day mart"));
+				"Sitapur Road, Lucknow", "226021", true, "Day to Day mart", ""));
 
 
 		repo.save(new UserProfile(new UserLogin("Seller8", "admin"), "Kapil",
 				"Mishra", "kapilM@abc.com" , "9484833000", "Ring Road, Near Cocacola Goadam",
-				"Vikas Nagar, Lucknow", "226022", true, "Family Bazar"));
+				"Vikas Nagar, Lucknow", "226022", true, "Family Bazar", ""));
 
 
 
 		repo.save(new UserProfile(new UserLogin("Seller9", "admin"), "Anjali",
 				"Tripathi", "anjaliT@abc.com" , "94849468730", "3/48, Mansarovar Yojna",
-				"Jalvayu Vihar Phase 2, Lucknow", "226010", true, "All Season Fresh Mart"));
+				"Jalvayu Vihar Phase 2, Lucknow", "226010", true, "All Season Fresh Mart", ""));
 
 
 
 		repo.save(new UserProfile(new UserLogin("Seller10", "admin"), "Lucky",
 				"Sachdeva", "luckyS@abc.com" , "94849473777", "HG-94, LDA Colony",
-				"Kanpur Road, Lucknow", "226012", true, "Sachdeva Store"));
+				"Kanpur Road, Lucknow", "226012", true, "Sachdeva Store", ""));
 
 		// User profiles
 		IntStream.range(1, 11)

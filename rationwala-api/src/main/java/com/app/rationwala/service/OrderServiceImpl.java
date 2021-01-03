@@ -12,6 +12,7 @@ import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.entity.OrderItem;
 import com.app.rationwala.entity.PurchaseOrder;
 import com.app.rationwala.entity.UserProfile;
+import com.app.rationwala.model.ItemInventory;
 import com.app.rationwala.model.StatusInfo;
 import com.app.rationwala.modeller.ItemModeller;
 import com.app.rationwala.repository.OrderItemRepository;
@@ -24,7 +25,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
-	
+
 	@Autowired
 	private ItemModeller itemModeller;
 
@@ -34,12 +35,15 @@ public class OrderServiceImpl implements OrderService {
 		res.setStatusInfo(new StatusInfo());
 		res.getStatusInfo().setMessages(new ArrayList<>());
 		double totalPrice = 0;
+		for (ItemInventory ii : placeOrderRequest.getItemInventoryList()) {
+			totalPrice += ii.getPrice();
+		}
 		Date date = Calendar.getInstance().getTime();
 		PurchaseOrder po = purchaseOrderRepository
 				.save(new PurchaseOrder(new UserProfile(placeOrderRequest.getBuyerProfileId()), totalPrice, date));
 		placeOrderRequest.getItemInventoryList().forEach(itemInventory -> {
-			orderItemRepository
-					.save(new OrderItem(itemModeller.unMarshallItemInventory(itemInventory), po, itemInventory.getPrice(), itemInventory.getOrderCount()));
+			orderItemRepository.save(new OrderItem(itemModeller.unMarshallItemInventory(itemInventory), po,
+					itemInventory.getPrice(), itemInventory.getOrderCount()));
 
 		});
 		res.getStatusInfo().setStatus(Status.SUCCESS);

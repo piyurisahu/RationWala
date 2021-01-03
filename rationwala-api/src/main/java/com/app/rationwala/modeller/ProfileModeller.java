@@ -8,6 +8,7 @@ import com.app.rationwala.dto.enums.StaffAuthType;
 import com.app.rationwala.entity.StaffAuth;
 import com.app.rationwala.entity.UserLogin;
 import com.app.rationwala.model.LoginCredential;
+import com.app.rationwala.model.ProfilePicture;
 import com.app.rationwala.model.UserProfile;
 
 public class ProfileModeller extends AbstractModeller {
@@ -25,6 +26,8 @@ public class ProfileModeller extends AbstractModeller {
 			result.setZipcode(userProfile.getZipcode());
 			result.setSellerProfile(userProfile.isSellerProfile());
 			result.setSellerBusinessName(userProfile.getSellerBusinessName());
+			result.setProfilePicture(new ProfilePicture());
+			result.getProfilePicture().setSellerLogoUrl(userProfile.getSellerLogoUrl());
 		}
 
 		return result;

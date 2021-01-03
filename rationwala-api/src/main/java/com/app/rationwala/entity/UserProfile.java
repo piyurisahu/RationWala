@@ -31,6 +31,7 @@ public @Getter @Setter @Entity class UserProfile {
 	private String zipcode;
 	private boolean sellerProfile;
 	private String sellerBusinessName;
+	private String sellerLogoUrl;
 
 	@OneToMany(mappedBy = "staffProfile")
 	private Set<StaffAuth> sellerProfiles;
@@ -52,7 +53,7 @@ public @Getter @Setter @Entity class UserProfile {
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
 			String addressLine1, String addressLine2, String zipcode, boolean sellerProfile,
-			String sellerBusinessName) {
+			String sellerBusinessName, String sellerLogoUrl) {
 		super();
 		this.userLogin = userLogin;
 		this.firstName = firstName;
@@ -64,11 +65,12 @@ public @Getter @Setter @Entity class UserProfile {
 		this.zipcode = zipcode;
 		this.sellerProfile = sellerProfile;
 		this.sellerBusinessName = sellerBusinessName;
+		this.sellerLogoUrl = sellerLogoUrl;
 	}
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
 			String addressLine1, String addressLine2, String zipcode) {
-		this(userLogin, firstName, lastName, email, phoneNumber, addressLine1, addressLine2, zipcode, false, null);
+		this(userLogin, firstName, lastName, email, phoneNumber, addressLine1, addressLine2, zipcode, false, null, null);
 	}
 
 	public UserProfile(Long id) {
