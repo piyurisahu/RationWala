@@ -13,9 +13,9 @@ import com.app.rationwala.repository.ItemInventoryRepository;
 import com.app.rationwala.repository.ItemRepository;
 import com.app.rationwala.repository.StaffAuthRepository;
 import com.app.rationwala.repository.UserProfileRepository;
-import com.app.rationwala.util.MockDataInDB;
 
 @SpringBootApplication
+@EnableWebMvc
 public class RationwalaApiApplication {
 
 	public static void main(String[] args) {
@@ -26,9 +26,9 @@ public class RationwalaApiApplication {
 	public CommandLineRunner demo(UserProfileRepository upr, StaffAuthRepository sar, ItemRepository ir,
 			ItemInventoryRepository iir) {
 		return (args) -> {
-			MockDataInDB.pushUserData(upr);
-			MockDataInDB.pushStaffAuthorization(sar);
-			MockDataInDB.pushItem(ir, iir);
+			//MockDataInDB.pushUserData(upr);
+			//MockDataInDB.pushStaffAuthorization(sar);
+			//MockDataInDB.pushItem(ir, iir);
 //			MockDataInDB.pushInventory(iir);
 		};
 	}

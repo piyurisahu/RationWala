@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,14 @@ import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.AccountService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("account")
 @Slf4j
+@Api(tags = { "Account API" }, value="AccountController", description="This controller contains all APIs realted to account changes such as login, register or update profile.")
 public class AccountController extends AbstractController {
 
 	@Autowired
@@ -34,11 +38,12 @@ public class AccountController extends AbstractController {
 	@Autowired
 	private Environment env;
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String index() {
 		return "Please go to user methods";
 	}
 
+	@ApiOperation(value="This API updates the user personal details")
 	@PostMapping(value = "profile/update", produces = "application/json")
 	public ResponseEntity<UpdateProfileResponse> updateProfile(@RequestBody UpdateProfileRequest updateProfileRequest) {
 		ResponseEntity<UpdateProfileResponse> res = null;
