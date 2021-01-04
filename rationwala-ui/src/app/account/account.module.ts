@@ -8,6 +8,7 @@ import { EditProfileComponent } from './edit-profile.component';
 import { LayoutComponent } from './layout.component';
 import { LoginComponent } from './login.component';
 import { RegisterComponent } from './register.component';
+import { RegisterSellerComponent } from './register.seller.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -20,7 +21,8 @@ import { RegisterComponent } from './register.component';
         LayoutComponent,
         LoginComponent,
         RegisterComponent,
-        EditProfileComponent
+        EditProfileComponent,
+        RegisterSellerComponent
     ]
 })
 export class AccountModule { }

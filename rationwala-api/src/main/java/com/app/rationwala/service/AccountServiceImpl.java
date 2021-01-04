@@ -22,6 +22,7 @@ import com.app.rationwala.model.Message;
 import com.app.rationwala.model.StatusInfo;
 import com.app.rationwala.modeller.ItemModeller;
 import com.app.rationwala.modeller.ProfileModeller;
+import com.app.rationwala.repository.ItemInventoryRepository;
 import com.app.rationwala.repository.StaffAuthRepository;
 import com.app.rationwala.repository.UserLoginRepository;
 import com.app.rationwala.repository.UserProfileRepository;
@@ -33,6 +34,9 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private UserLoginRepository userLoginRepository;
+	
+	@Autowired
+	private ItemInventoryRepository itemInventoryRepository;
 
 	@Autowired
 	private UserProfileRepository userProfileRepository;
@@ -75,14 +79,29 @@ public class AccountServiceImpl implements AccountService {
 	public RegisterResponse register(RegisterRequest registerRequest) {
 		RegisterResponse res = new RegisterResponse();
 		com.app.rationwala.model.UserProfile modelUserProfile = registerRequest.getUserProfile();
+		String sellerLogoUrl = null;
+		if(modelUserProfile.getProfilePicture() != null) {
+			sellerLogoUrl = modelUserProfile.getProfilePicture().getSellerLogoUrl();
+		}
 		UserProfile resp = userProfileRepository.save(new UserProfile(
 				new UserLogin(registerRequest.getLoginCredential().getUsername(),
 						registerRequest.getLoginCredential().getPassword()),
 				modelUserProfile.getFirstName(), modelUserProfile.getLastName(), modelUserProfile.getEmail(),
 				modelUserProfile.getPhoneNumber(), modelUserProfile.getAddressLine1(),
-				modelUserProfile.getAddressLine2(), modelUserProfile.getCity(), modelUserProfile.getState(), modelUserProfile.getZipcode()));
+				modelUserProfile.getAddressLine2(), modelUserProfile.getCity(), modelUserProfile.getState(), modelUserProfile.getZipcode(),  modelUserProfile.isSellerProfile(), modelUserProfile.getSellerBusinessName(), sellerLogoUrl));
+		if(modelUserProfile.isSellerProfile()) {
+			addDefaultItemsToSeller(resp);
+		}
 		res.setUserProfile(new ProfileModeller().marshallUserProfile(resp));
 		return res;
+	}
+
+	private void addDefaultItemsToSeller(UserProfile resp) {
+		itemInventoryRepository.getInventoryBySellerId(1L).forEach(itemInv->{
+			itemInv.setSellerProfile(resp);
+			itemInv.setCountInStock(0);
+			itemInventoryRepository.save(itemInv);
+		});
 	}
 
 	@Override

@@ -1,6 +1,6 @@
 ﻿import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,11 +12,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // used to create fake backend
 import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './_helpers';
 import { StoreOrdersComponent } from './home/store-orders.component';
+import { UpdateInventoryComponent } from './home/update-inventory.component';
 
 
 @NgModule({
     imports: [
         BrowserModule,
+        FormsModule,
         FlexLayoutModule,
         CustomMaterialModule,
         BrowserAnimationsModule,
@@ -29,7 +31,8 @@ import { StoreOrdersComponent } from './home/store-orders.component';
         AlertComponent,
         HomeComponent,
         OrdersComponent,
-        StoreOrdersComponent
+        StoreOrdersComponent,
+        UpdateInventoryComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

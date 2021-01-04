@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -6,9 +6,10 @@ import { first } from 'rxjs/operators';
 import { AccountService, AlertService } from '../_services';
 import { UserProfile } from '../_models/user-profile.model';
 import { LoginCredential } from '../_services/dto/login-request';
+import { ProfilePicture } from '../_models/profile-picture';
 
-@Component({ templateUrl: 'register.component.html' })
-export class RegisterComponent implements OnInit {
+@Component({ templateUrl: 'register.seller.component.html' })
+export class RegisterSellerComponent implements OnInit {
     form: FormGroup;
     loading = false;
     submitted = false;
@@ -32,7 +33,9 @@ export class RegisterComponent implements OnInit {
             pincode: new FormControl('', Validators.pattern('^[0-9]{1,6}$')),
             state: new FormControl(''),
             phone: new FormControl('', Validators.pattern('^[0-9]{1,10}$')),
-            password: new FormControl('', Validators.minLength(6))
+            password: new FormControl('', Validators.minLength(6)),
+            sellerLogoUrl:new FormControl(''),
+            sellerBusinessName:new FormControl(''),
         });
     }
 
@@ -61,6 +64,10 @@ export class RegisterComponent implements OnInit {
         userProfile.$state = this.form.get('state').value;
         userProfile.$phoneNumber = this.form.get('phone').value;
         userProfile.$zipcode = this.form.get('pincode').value;
+        userProfile.$sellerProfile = true;
+        userProfile.$profilePicture = new ProfilePicture();
+        userProfile.$profilePicture.$sellerLogoUrl = this.form.get('sellerLogoUrl').value;
+        userProfile.$sellerBusinessName = this.form.get('sellerBusinessName').value;
 
         let loginCredential = new LoginCredential(this.form.get('email').value, this.form.get('password').value);
 

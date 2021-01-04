@@ -47,8 +47,9 @@
                 <ng-container matColumnDef="action">
                     <th mat-header-cell *matHeaderCellDef></th>
                     <td class="text-center" mat-cell *matCellDef="let element">
-                        <button *ngIf="element.count == 0" mat-button color="primary" (click)="addToCart(element)">Add
-                            to Cart</button>
+                        <button *ngIf="element.count == 0" mat-button color="primary" [disabled]="element.itemInventory.countInStock == 0" (click)="addToCart(element)">
+                            {{element.itemInventory.countInStock == 0?'Out of Stock':'Choose Item'}}
+                        </button>
                         <mat-form-field *ngIf="element.count != 0" class="counter">
                             <button mat-icon-button matPrefix aria-label="Remove"
                                 (click)="incrementValue(-_step, element)" [disabled]="shouldDisableDecrement(element)">

@@ -14,7 +14,7 @@ export class TableRow {
     main: string;
     desc: string;
     quantity: string;
-    price: string;
+    price: number;
     itemInventory: ItemInventory;
     count: number;
     constructor(itemInventory: ItemInventory) {
@@ -22,12 +22,12 @@ export class TableRow {
         this.main = itemInventory.$item.$itemBrand + ' ' + itemInventory.$item.$itemName;
         this.desc = itemInventory.$description;
         this.quantity = itemInventory.$quantity + ' ' + (itemInventory.$unit == 'KILO_GRAM' ? 'Kg.' : itemInventory.$unit == 'LITER' ? 'Ltr.' : itemInventory.$unit == 'GRAM' ? 'gm.' : itemInventory.$unit == 'ML' ? 'ml.' : '');
-        this.price = itemInventory.$price.toString();
+        this.price = itemInventory.$price;
         this.count = 0;
     }
 }
 
-@Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
+@Component({ templateUrl: 'home.component.html' })
 export class HomeComponent {
     selectItemdisplayedColumns: string[] = ['main', 'desc', 'quantity', 'price', 'action'];
     selectedItemdisplayedColumns: string[] = ['main', 'quantity', 'price', 'count'];
@@ -44,11 +44,7 @@ export class HomeComponent {
     cartDataSource: MatTableDataSource<TableRow>;
     totalCartPrice: number = 0;
 
-    _value: number = 0;
     _step: number = 1;
-    _min: number = 0;
-    _max: number = Infinity;
-    _wrap: boolean = false;
     color: string = 'default';
     constructor(
         private userService: UserService,
@@ -121,7 +117,7 @@ export class HomeComponent {
                 });
         }
         else if (event.selectedIndex === 1 && this.selectedIndex === 0) {
-            this.itemService.getAllSellers(this.ssf.selectStore.value).subscribe(
+            this.itemService.getSellerInventory(this.ssf.selectStore.value).subscribe(
                 data => {
                     this.itemInventoryList = data;
                     this.selectItemdataSource = new MatTableDataSource();
@@ -141,13 +137,6 @@ export class HomeComponent {
     radioChange(event) {
         this.sellerProfiles.filter(data => data.$userProfileId === event.value).map(data => this.selectedShop = data.$sellerBusinessName);
     }
-    private parseNumber(num: any): number {
-        return +num;
-    }
-
-    private parseBoolean(bool: any): boolean {
-        return !!bool;
-    }
 
     setColor(color: string): void {
         this.color = color;
@@ -160,32 +149,8 @@ export class HomeComponent {
     incrementValue(step: number = 1, tableRow: TableRow): void {
         tableRow.count = tableRow.count + step;
         tableRow.itemInventory.$orderCount = tableRow.itemInventory.$orderCount + step;
-        let inputValue = this._value + step;
-
-        if (this._wrap) {
-            inputValue = this.wrappedValue(inputValue);
-        }
-
-        this._value = inputValue;
         this.countCartItems();
 
-    }
-
-    private wrappedValue(inputValue): number {
-        if (inputValue > this._max) {
-            return this._min + inputValue - this._max;
-        }
-
-        if (inputValue < this._min) {
-
-            if (this._max === Infinity) {
-                return 0;
-            }
-
-            return this._max + inputValue;
-        }
-
-        return inputValue;
     }
 
     shouldDisableDecrement(tableRow: TableRow): boolean {

@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.accountService.logout();
         this.form = this.formBuilder.group({
-            username: ['user1', Validators.required],
-            password: ['admin', Validators.required]
+            username: ['', Validators.required],
+            password: ['', Validators.required]
         });
 
         // get return url from route parameters or default to '/'

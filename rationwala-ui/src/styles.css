@@ -49,3 +49,6 @@ input::-webkit-inner-spin-button {
 .home mat-radio-button label:hover {
   border-color: #3f51b5;
 }
+.counter{
+  width:4.7em;
+}
