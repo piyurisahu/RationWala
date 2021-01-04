@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Builder } from 'protractor';
-import { ItemInventory } from '../_models/item-inventory';
 import { AccountService, AlertService, ItemService } from '../_services';
 import { UpdateItemInventoryRequest } from '../_services/dto/update-item-inventory-request';
 import { TableRow } from './home.component';
@@ -56,7 +54,7 @@ export class UpdateInventoryComponent {
   incrementValue(step: number = 1, tableRow: TableRow): void {
     tableRow.count = tableRow.count + step;
     tableRow.itemInventory.$countInStock = tableRow.count;
-  }
+  }P
 
   shouldDisableDecrement(tableRow: TableRow): boolean {
     return tableRow.count === 0;
@@ -68,7 +66,6 @@ export class UpdateInventoryComponent {
   updateInvetory() {
     let itemInventoryList = new Array();
     this.selectItemdataSource.data.forEach(data => {
-      data.itemInventory.$description = data.desc;
       data.itemInventory.$countInStock = data.count;
       data.itemInventory.$price = data.price;
       itemInventoryList.push(data.itemInventory);
