@@ -15,6 +15,8 @@ import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.dto.LoginResponse;
 import com.app.rationwala.dto.RegisterRequest;
 import com.app.rationwala.dto.RegisterResponse;
+import com.app.rationwala.dto.UpdateProfileRequest;
+import com.app.rationwala.dto.UpdateProfileResponse;
 import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.AccountService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -37,12 +39,31 @@ public class AccountController extends AbstractController {
 		return "Please go to user methods";
 	}
 
+	@PostMapping(value = "profile/update", produces = "application/json")
+	public ResponseEntity<UpdateProfileResponse> updateProfile(@RequestBody UpdateProfileRequest updateProfileRequest) {
+		ResponseEntity<UpdateProfileResponse> res = null;
+		try {
+			log.debug(mapper.writeValueAsString(updateProfileRequest));
+			if (updateProfileRequest.getUserProfile() == null) {
+				throw new Exception();
+			}
+			UpdateProfileResponse ures = accountService.updateUser(updateProfileRequest);
+			HttpStatus status = HttpStatus.OK;
+			res = new ResponseEntity<UpdateProfileResponse>(ures, status);
+		} catch (Exception e) {
+			res = new ResponseEntity<UpdateProfileResponse>(HttpStatus.BAD_REQUEST);
+			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
+			log.error(e.getStackTrace().toString());
+		}
+		return res;
+	}
+
 	@PostMapping(value = "login", produces = "application/json")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 		ResponseEntity<LoginResponse> res = null;
 		try {
 			log.debug(mapper.writeValueAsString(loginRequest));
-			if(loginRequest.getLoginCredential() == null) {
+			if (loginRequest.getLoginCredential() == null) {
 				throw new Exception();
 			}
 			LoginResponse lres = accountService.login(loginRequest);
@@ -57,7 +78,7 @@ public class AccountController extends AbstractController {
 		}
 		return res;
 	}
-	
+
 	@PostMapping(value = "register", produces = "application/json")
 	public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
 		ResponseEntity<RegisterResponse> res = null;

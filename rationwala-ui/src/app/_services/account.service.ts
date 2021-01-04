@@ -8,6 +8,7 @@ import { UserProfile } from '../_models';
 import { LoginCredential, LoginRequest } from './dto/login-request';
 import { LoginResponse } from './dto/login-response';
 import { RegisterRequest } from './dto/register-request';
+import { UpdateProfileRequest } from './dto/update-profile-request';
 
 
 @Injectable({ providedIn: 'root' })
@@ -28,6 +29,12 @@ export class AccountService {
         registerRequest.$loginCredential = loginCredential;
         registerRequest.$userProfile = userProfile;
         return this.http.post(`${environment.rationwalaApiUrl}/account/register`, registerRequest);
+    }
+
+    updateProfile(userProfile: UserProfile) {
+        let updateProfileRequest = new UpdateProfileRequest();
+        updateProfileRequest.$userProfile = userProfile;
+        return this.http.post(`${environment.rationwalaApiUrl}/account/profile/update`, updateProfileRequest);
     }
 
     public get loginResponse(): LoginResponse {
@@ -51,49 +58,5 @@ export class AccountService {
         localStorage.removeItem('loggedInUser');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
-    }
-
-
-
-
-
-
-
-
-
-    
-    getAll() {
-        return this.http.get<UserProfile[]>(`${environment.apiUrl}/users`);
-    }
-
-    getById(id: string) {
-        return this.http.get<UserProfile>(`${environment.apiUrl}/users/${id}`);
-    }
-
-    update(id, params) {
-        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
-            .pipe(map(x => {
-                // update stored user if the logged in user updated their own record
-                if (id == this.loginResponse.$userProfile.$userProfileId) {
-                    // update local storage
-                    const user = { ...this.loginResponse, ...params };
-                    localStorage.setItem('loggedInUser', JSON.stringify(user));
-
-                    // publish updated user to subscribers
-                    this.userSubject.next(user);
-                }
-                return x;
-            }));
-    }
-
-    delete(id: number) {
-        return this.http.delete(`${environment.apiUrl}/users/${id}`)
-            .pipe(map(x => {
-                // auto logout if the logged in user deleted their own record
-                if (id == this.loginResponse.$userProfile.$userProfileId) {
-                    this.logout();
-                }
-                return x;
-            }));
     }
 }

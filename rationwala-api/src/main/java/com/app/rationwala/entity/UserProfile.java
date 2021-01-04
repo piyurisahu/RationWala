@@ -28,6 +28,8 @@ public @Getter @Setter @Entity class UserProfile {
 	private String phoneNumber;
 	private String addressLine1;
 	private String addressLine2;
+	private String city;
+	private String state;
 	private String zipcode;
 	private boolean sellerProfile;
 	private String sellerBusinessName;
@@ -52,7 +54,7 @@ public @Getter @Setter @Entity class UserProfile {
 	}
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
-			String addressLine1, String addressLine2, String zipcode, boolean sellerProfile,
+			String addressLine1, String addressLine2, String city, String state, String zipcode, boolean sellerProfile,
 			String sellerBusinessName, String sellerLogoUrl) {
 		super();
 		this.userLogin = userLogin;
@@ -62,6 +64,8 @@ public @Getter @Setter @Entity class UserProfile {
 		this.phoneNumber = phoneNumber;
 		this.addressLine1 = addressLine1;
 		this.addressLine2 = addressLine2;
+		this.city = city;
+		this.state = state;
 		this.zipcode = zipcode;
 		this.sellerProfile = sellerProfile;
 		this.sellerBusinessName = sellerBusinessName;
@@ -69,8 +73,8 @@ public @Getter @Setter @Entity class UserProfile {
 	}
 
 	public UserProfile(UserLogin userLogin, String firstName, String lastName, String email, String phoneNumber,
-			String addressLine1, String addressLine2, String zipcode) {
-		this(userLogin, firstName, lastName, email, phoneNumber, addressLine1, addressLine2, zipcode, false, null, null);
+			String addressLine1, String addressLine2, String city, String state, String zipcode) {
+		this(userLogin, firstName, lastName, email, phoneNumber, addressLine1, addressLine2, city, state, zipcode, false, null, null);
 	}
 
 	public UserProfile(Long id) {

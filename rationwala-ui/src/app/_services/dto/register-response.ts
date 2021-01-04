@@ -4,7 +4,13 @@ import { StatusInfo } from "./status-info";
 export class RegisterResponse{
     private userProfile:UserProfile;
     private statusInfo:StatusInfo;
-
+    public deserialize(o: Object): RegisterResponse {
+        if (!o) return;
+        Object.assign(this, o);
+        this.$statusInfo = new StatusInfo().deserialize(this.$statusInfo);
+        this.$userProfile = new UserProfile().deserialize(this.$userProfile);
+        return this;
+    }
     /**
      * Getter $userProfile
      * @return {UserProfile}

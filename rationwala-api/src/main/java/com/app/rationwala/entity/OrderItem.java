@@ -25,6 +25,8 @@ public @Getter @Setter @Entity class OrderItem {
 
 	private int orderCount;
 
+	public OrderItem() {}
+	
 	public OrderItem(ItemInventory itemInventory, PurchaseOrder purchaseOrder, double price, int orderCount) {
 		this.itemInventory = itemInventory;
 		this.purchaseOrder = purchaseOrder;

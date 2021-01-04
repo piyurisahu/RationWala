@@ -17,6 +17,7 @@ public class ItemModeller extends AbstractModeller {
 			itemInventoryList = new ArrayList<>();
 			itemInvent.forEach(itemInv -> {
 				ItemInventory itemInventory = new ItemInventory();
+				itemInventory.setId(itemInv.getId());
 				itemInventory.setDescription(itemInv.getDescription());
 				itemInventory.setPrice(itemInv.getPrice());
 				itemInventory.setCountInStock(itemInv.getCountInStock());
@@ -46,6 +47,7 @@ public class ItemModeller extends AbstractModeller {
 			itemInventoryList = new ArrayList<>();
 			itemInvent.forEach(itemInv -> {
 				ItemInventory itemInventory = new ItemInventory();
+				itemInventory.setId(itemInv.getId());
 				itemInventory.setDescription(itemInv.getDescription());
 				itemInventory.setPrice(itemInv.getPrice());
 				itemInventory.setCountInStock(itemInv.getCountInStock());
@@ -68,56 +70,53 @@ public class ItemModeller extends AbstractModeller {
 		}
 		return itemInventoryList;
 	}
-	
-	public List<com.app.rationwala.entity.ItemInventory> unMarshallItemInventory(List<ItemInventory> itemInvent) {
-		final List<com.app.rationwala.entity.ItemInventory> itemInventoryList;
-		if (isNotNull(itemInvent) && !itemInvent.isEmpty()) {
-			itemInventoryList = new ArrayList<>();
-			itemInvent.forEach(itemInv -> {
-				com.app.rationwala.entity.ItemInventory itemInventory = new com.app.rationwala.entity.ItemInventory();
-				itemInventory.setDescription(itemInv.getDescription());
-				itemInventory.setPrice(itemInv.getPrice());
-				itemInventory.setCountInStock(itemInv.getCountInStock());
-				itemInventory.setQuantity(itemInv.getQuantity());
-				itemInventory.setUnit(itemInv.getUnit().name());
-				if (isNotNull(itemInv.getItem())) {
-					itemInventory.setItem(new com.app.rationwala.entity.Item());
-					itemInventory.getItem().setId(itemInv.getItem().getItemId());
-					itemInventory.getItem().setItemBrand(itemInv.getItem().getItemBrand());
-					itemInventory.getItem().setItemCategory(itemInv.getItem().getItemCategory().name());
-					itemInventory.getItem().setItemName(itemInv.getItem().getItemName());
-					itemInventory.getItem().setItemType(itemInv.getItem().getItemType());
-					itemInventory.getItem().setPackageType(itemInv.getItem().getPackageType().name());
-				}
-				itemInventoryList.add(itemInventory);
-			});
-		} else {
-			itemInventoryList = null;
-		}
-		return itemInventoryList;
-	}
-	
-	public com.app.rationwala.entity.ItemInventory unMarshallItemInventory(ItemInventory itemInv) {
-		final com.app.rationwala.entity.ItemInventory itemInventory;
-		if (isNotNull(itemInv)) {
-			itemInventory = new com.app.rationwala.entity.ItemInventory();
-			itemInventory.setDescription(itemInv.getDescription());
-			itemInventory.setPrice(itemInv.getPrice());
-			itemInventory.setCountInStock(itemInv.getCountInStock());
-			itemInventory.setQuantity(itemInv.getQuantity());
-			itemInventory.setUnit(itemInv.getUnit().name());
-			if (isNotNull(itemInv.getItem())) {
-				itemInventory.setItem(new com.app.rationwala.entity.Item());
-				itemInventory.getItem().setId(itemInv.getItem().getItemId());
-				itemInventory.getItem().setItemBrand(itemInv.getItem().getItemBrand());
-				itemInventory.getItem().setItemCategory(itemInv.getItem().getItemCategory().name());
-				itemInventory.getItem().setItemName(itemInv.getItem().getItemName());
-				itemInventory.getItem().setItemType(itemInv.getItem().getItemType());
-				itemInventory.getItem().setPackageType(itemInv.getItem().getPackageType().name());
-			}
-		} else {
-			itemInventory = null;
-		}
-		return itemInventory;
-	}
+
+	/*
+	 * public List<com.app.rationwala.entity.ItemInventory>
+	 * unMarshallItemInventory(List<ItemInventory> itemInvent) { final
+	 * List<com.app.rationwala.entity.ItemInventory> itemInventoryList; if
+	 * (isNotNull(itemInvent) && !itemInvent.isEmpty()) { itemInventoryList = new
+	 * ArrayList<>(); itemInvent.forEach(itemInv -> {
+	 * com.app.rationwala.entity.ItemInventory itemInventory = new
+	 * com.app.rationwala.entity.ItemInventory();
+	 * itemInventory.setId(itemInv.getId());
+	 * itemInventory.setDescription(itemInv.getDescription());
+	 * itemInventory.setPrice(itemInv.getPrice());
+	 * itemInventory.setCountInStock(itemInv.getCountInStock());
+	 * itemInventory.setQuantity(itemInv.getQuantity());
+	 * itemInventory.setUnit(itemInv.getUnit().name()); if
+	 * (isNotNull(itemInv.getItem())) { itemInventory.setItem(new
+	 * com.app.rationwala.entity.Item());
+	 * itemInventory.getItem().setId(itemInv.getItem().getItemId());
+	 * itemInventory.getItem().setItemBrand(itemInv.getItem().getItemBrand());
+	 * itemInventory.getItem().setItemCategory(itemInv.getItem().getItemCategory().
+	 * name());
+	 * itemInventory.getItem().setItemName(itemInv.getItem().getItemName());
+	 * itemInventory.getItem().setItemType(itemInv.getItem().getItemType());
+	 * itemInventory.getItem().setPackageType(itemInv.getItem().getPackageType().
+	 * name()); } itemInventoryList.add(itemInventory); }); } else {
+	 * itemInventoryList = null; } return itemInventoryList; }
+	 * 
+	 * public com.app.rationwala.entity.ItemInventory
+	 * unMarshallItemInventory(ItemInventory itemInv) { final
+	 * com.app.rationwala.entity.ItemInventory itemInventory; if
+	 * (isNotNull(itemInv)) { itemInventory = new
+	 * com.app.rationwala.entity.ItemInventory();
+	 * itemInventory.setId(itemInv.getId());
+	 * itemInventory.setDescription(itemInv.getDescription());
+	 * itemInventory.setPrice(itemInv.getPrice());
+	 * itemInventory.setCountInStock(itemInv.getCountInStock());
+	 * itemInventory.setQuantity(itemInv.getQuantity());
+	 * itemInventory.setUnit(itemInv.getUnit().name()); if
+	 * (isNotNull(itemInv.getItem())) { itemInventory.setItem(new
+	 * com.app.rationwala.entity.Item());
+	 * itemInventory.getItem().setId(itemInv.getItem().getItemId());
+	 * itemInventory.getItem().setItemBrand(itemInv.getItem().getItemBrand());
+	 * itemInventory.getItem().setItemCategory(itemInv.getItem().getItemCategory().
+	 * name());
+	 * itemInventory.getItem().setItemName(itemInv.getItem().getItemName());
+	 * itemInventory.getItem().setItemType(itemInv.getItem().getItemType());
+	 * itemInventory.getItem().setPackageType(itemInv.getItem().getPackageType().
+	 * name()); } } else { itemInventory = null; } return itemInventory; }
+	 */
 }

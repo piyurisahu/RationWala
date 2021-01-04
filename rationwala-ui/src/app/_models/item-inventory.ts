@@ -1,6 +1,9 @@
 import { Item } from "./item";
+import { UserProfile } from "./user-profile.model";
 
 export class ItemInventory{
+    private id:number;
+    private sellerProfile:UserProfile;
     private item:Item;
 	private description:string;
 	private price:number;
@@ -13,8 +16,41 @@ export class ItemInventory{
         if(!o)return;
         Object.assign(this, o);
         this.$item = new Item().deserialize(this.$item);
+        this.$sellerProfile = new UserProfile().deserialize(this.$sellerProfile);
         return this;
     }
+
+    /**
+     * Getter $sellerProfile
+     * @return {UserProfile}
+     */
+	public get $sellerProfile(): UserProfile {
+		return this.sellerProfile;
+	}
+
+    /**
+     * Setter $sellerProfile
+     * @param {UserProfile} value
+     */
+	public set $sellerProfile(value: UserProfile) {
+		this.sellerProfile = value;
+	}
+
+    /**
+     * Getter $id
+     * @return {number}
+     */
+	public get $id(): number {
+		return this.id;
+	}
+
+    /**
+     * Setter $id
+     * @param {number} value
+     */
+	public set $id(value: number) {
+		this.id = value;
+	}
 
     /**
      * Getter $item

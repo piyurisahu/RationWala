@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { GetAllSellerRequest } from './dto/get-all-seller-request';
@@ -11,8 +10,7 @@ import { GetAllSellerResponse } from './dto/get-all-seller-response';
 })
 export class UserService {
 
-  constructor(private router: Router,
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAllSellers(zipcode: number) {
     let getAllSellerRequest = new GetAllSellerRequest();

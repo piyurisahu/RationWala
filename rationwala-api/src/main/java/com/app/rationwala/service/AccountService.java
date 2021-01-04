@@ -8,6 +8,8 @@ import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.dto.LoginResponse;
 import com.app.rationwala.dto.RegisterRequest;
 import com.app.rationwala.dto.RegisterResponse;
+import com.app.rationwala.dto.UpdateProfileRequest;
+import com.app.rationwala.dto.UpdateProfileResponse;
 
 @Service
 public interface AccountService {
@@ -16,5 +18,7 @@ public interface AccountService {
 	public RegisterResponse register(RegisterRequest registerRequest);
 
 	public AuthorizeStaffResponse authorizeStaff(AuthorizeStaffRequest authorizeUserRequest);
+
+	public UpdateProfileResponse updateUser(UpdateProfileRequest updateProfileRequest);
 
 }

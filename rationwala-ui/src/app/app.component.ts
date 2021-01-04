@@ -13,7 +13,6 @@ export class AppComponent {
         this.accountService.login.subscribe(x => {
             this.loginResponse = x;
             this.isLoggedIn = x != undefined && x != null;
-
         });
     }
 

@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { GetSellerInventoryRequest } from './dto/get-seller-inventory-request';
@@ -11,8 +10,7 @@ import { GetSellerInventoryResponse } from './dto/get-seller-inventory-response'
 })
 export class ItemService {
 
-  constructor(private router: Router,
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   getAllSellers(sellerProfileId: number) {
     let getSellerInventoryRequest = new GetSellerInventoryRequest();

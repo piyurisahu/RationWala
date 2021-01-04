@@ -30,4 +30,8 @@ public @Getter @Setter @Entity class UserLogin {
 		this.password = password;
 	}
 
+	public UserLogin(Long userLoginId) {
+		this.id = userLoginId;
+	}
+
 }

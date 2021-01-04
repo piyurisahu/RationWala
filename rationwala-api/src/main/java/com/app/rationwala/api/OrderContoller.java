@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.rationwala.dto.GetOrderRequest;
+import com.app.rationwala.dto.GetOrderResponse;
 import com.app.rationwala.dto.PlaceOrderRequest;
 import com.app.rationwala.dto.PlaceOrderResponse;
 import com.app.rationwala.service.OrderService;
@@ -32,7 +34,7 @@ public class OrderContoller extends AbstractController {
 	}
 
 	@PostMapping(value = "placeOrder", produces = "application/json")
-	public ResponseEntity<PlaceOrderResponse> getSellerInventory(@RequestBody PlaceOrderRequest placeOrderRequest) {
+	public ResponseEntity<PlaceOrderResponse> placeOrder(@RequestBody PlaceOrderRequest placeOrderRequest) {
 		ResponseEntity<PlaceOrderResponse> res = null;
 		try {
 			log.debug(mapper.writeValueAsString(placeOrderRequest));
@@ -50,4 +52,24 @@ public class OrderContoller extends AbstractController {
 		}
 		return res;
 	}
+	
+	@PostMapping(value = "buyer", produces = "application/json")
+	public ResponseEntity<GetOrderResponse> getOrdersbyBuyer(@RequestBody GetOrderRequest getOrderRequest) {
+		ResponseEntity<GetOrderResponse> res = null;
+		try {
+			log.debug(mapper.writeValueAsString(getOrderRequest));
+			if (getOrderRequest.getUserId() == null) {
+				throw new Exception();
+			}
+			GetOrderResponse gres = orderService.getOrdersByBuyer(getOrderRequest);
+			HttpStatus status = HttpStatus.OK;
+			res = new ResponseEntity<GetOrderResponse>(gres, status);
+		} catch (Exception e) {
+			res = new ResponseEntity<GetOrderResponse>(HttpStatus.BAD_REQUEST);
+			log.warn(env.getProperty("warn.exception.occurred"), ": ", e.getMessage());
+			log.error(e.getStackTrace().toString());
+		}
+		return res;
+	}
+	
 }

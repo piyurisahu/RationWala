@@ -5,6 +5,8 @@ import com.app.rationwala.dto.enums.ItemUnitType;
 import lombok.Data;
 
 public @Data class ItemInventory {
+	private Long Id;
+	private UserProfile sellerProfile;
 	private Item item;
 	private String description;
 	private double price;

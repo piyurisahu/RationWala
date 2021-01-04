@@ -23,11 +23,14 @@ public class ProfileModeller extends AbstractModeller {
 			result.setAddressLine1(userProfile.getAddressLine1());
 			result.setAddressLine2(userProfile.getAddressLine2());
 			result.setPhoneNumber(userProfile.getPhoneNumber());
+			result.setCity(userProfile.getCity());
+			result.setState(userProfile.getState());
 			result.setZipcode(userProfile.getZipcode());
 			result.setSellerProfile(userProfile.isSellerProfile());
 			result.setSellerBusinessName(userProfile.getSellerBusinessName());
 			result.setProfilePicture(new ProfilePicture());
 			result.getProfilePicture().setSellerLogoUrl(userProfile.getSellerLogoUrl());
+			result.setUserLoginId(userProfile.getUserLogin().getId());
 		}
 
 		return result;

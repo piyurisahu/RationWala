@@ -12,6 +12,8 @@ import com.app.rationwala.dto.LoginRequest;
 import com.app.rationwala.dto.LoginResponse;
 import com.app.rationwala.dto.RegisterRequest;
 import com.app.rationwala.dto.RegisterResponse;
+import com.app.rationwala.dto.UpdateProfileRequest;
+import com.app.rationwala.dto.UpdateProfileResponse;
 import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.entity.StaffAuth;
 import com.app.rationwala.entity.UserLogin;
@@ -40,7 +42,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Autowired
 	private ProfileModeller profileModeller;
-	
+
 	@Autowired
 	private ItemModeller itemModeller;
 
@@ -78,7 +80,7 @@ public class AccountServiceImpl implements AccountService {
 						registerRequest.getLoginCredential().getPassword()),
 				modelUserProfile.getFirstName(), modelUserProfile.getLastName(), modelUserProfile.getEmail(),
 				modelUserProfile.getPhoneNumber(), modelUserProfile.getAddressLine1(),
-				modelUserProfile.getAddressLine2(), modelUserProfile.getZipcode()));
+				modelUserProfile.getAddressLine2(), modelUserProfile.getCity(), modelUserProfile.getState(), modelUserProfile.getZipcode()));
 		res.setUserProfile(new ProfileModeller().marshallUserProfile(resp));
 		return res;
 	}
@@ -122,6 +124,23 @@ public class AccountServiceImpl implements AccountService {
 			res.getStatusInfo().setStatus(Status.SUCCESS);
 		});
 
+		return res;
+	}
+
+	@Override
+	public UpdateProfileResponse updateUser(UpdateProfileRequest updateProfileRequest) {
+		UpdateProfileResponse res = new UpdateProfileResponse();
+		UserLogin userLogin = userLoginRepository.findById(updateProfileRequest.getUserProfile().getUserLoginId()).get();
+		UserProfile profile = new UserProfile(userLogin,
+				updateProfileRequest.getUserProfile().getFirstName(),
+				updateProfileRequest.getUserProfile().getLastName(), updateProfileRequest.getUserProfile().getEmail(),
+				updateProfileRequest.getUserProfile().getPhoneNumber(),
+				updateProfileRequest.getUserProfile().getAddressLine1(),
+				updateProfileRequest.getUserProfile().getAddressLine2(),
+				updateProfileRequest.getUserProfile().getCity(), updateProfileRequest.getUserProfile().getState(),
+				updateProfileRequest.getUserProfile().getZipcode());
+		profile.setId(updateProfileRequest.getUserProfile().getUserProfileId());
+		userProfileRepository.save(profile);
 		return res;
 	}
 

@@ -10,9 +10,11 @@ export class UserProfile {
 	private addressLine1:string;
     private addressLine2:string;
     private city:string;
+    private state:string;
     private zipcode:number;
 	private sellerProfile:boolean;
-	private sellerBusinessName:string;
+    private sellerBusinessName:string;
+    private userLoginId:number;
     
     public deserialize(o: Object): UserProfile{
         if(!o)return;
@@ -20,6 +22,38 @@ export class UserProfile {
         this.$profilePicture = new ProfilePicture().deserialize(this.profilePicture);
         return this;
     }
+
+    /**
+     * Getter $userLoginId
+     * @return {number}
+     */
+	public get $userLoginId(): number {
+		return this.userLoginId;
+	}
+
+    /**
+     * Setter $userLoginId
+     * @param {number} value
+     */
+	public set $userLoginId(value: number) {
+		this.userLoginId = value;
+	}
+
+    /**
+     * Getter $state
+     * @return {string}
+     */
+	public get $state(): string {
+		return this.state;
+	}
+
+    /**
+     * Setter $state
+     * @param {string} value
+     */
+	public set $state(value: string) {
+		this.state = value;
+	}
     
     /**
      * Getter $profilePicture

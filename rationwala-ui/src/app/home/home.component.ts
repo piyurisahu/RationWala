@@ -7,9 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { UserProfile } from '../_models';
 import { ItemInventory } from '../_models/item-inventory';
-import { AccountService, AlertService } from '../_services';
-import { ItemService } from '../_services/item.service';
-import { UserService } from '../_services/user.service';
+import { AccountService, AlertService, OrderService, ItemService, UserService } from '../_services';
+import { PlaceOrderRequest } from '../_services/dto/place-order-request';
 
 export class TableRow {
     main: string;
@@ -22,7 +21,7 @@ export class TableRow {
         this.itemInventory = itemInventory;
         this.main = itemInventory.$item.$itemBrand + ' ' + itemInventory.$item.$itemName;
         this.desc = itemInventory.$description;
-        this.quantity = itemInventory.$quantity + ' ' + (itemInventory.$unit == 'KILO_GRAM' ? 'Kg.' : itemInventory.$unit == 'LITER' ? 'Ltr.' : '');
+        this.quantity = itemInventory.$quantity + ' ' + (itemInventory.$unit == 'KILO_GRAM' ? 'Kg.' : itemInventory.$unit == 'LITER' ? 'Ltr.' : itemInventory.$unit == 'GRAM' ? 'gm.' : itemInventory.$unit == 'ML' ? 'ml.' : '');
         this.price = itemInventory.$price.toString();
         this.count = 0;
     }
@@ -30,7 +29,8 @@ export class TableRow {
 
 @Component({ templateUrl: 'home.component.html', styleUrls: ['home.component.css'] })
 export class HomeComponent {
-    displayedColumns: string[] = ['main', 'desc', 'quantity', 'price', 'action'];
+    selectItemdisplayedColumns: string[] = ['main', 'desc', 'quantity', 'price', 'action'];
+    selectedItemdisplayedColumns: string[] = ['main', 'quantity', 'price', 'count'];
     userProfile: UserProfile;
     sellerProfiles: UserProfile[];
     itemInventoryList: ItemInventory[];
@@ -41,7 +41,8 @@ export class HomeComponent {
     selectedIndex: number = 0;
     selectedShop: string;
     selectItemdataSource: MatTableDataSource<TableRow>;
-    cart:TableRow[];
+    cartDataSource: MatTableDataSource<TableRow>;
+    totalCartPrice: number = 0;
 
     _value: number = 0;
     _step: number = 1;
@@ -53,6 +54,7 @@ export class HomeComponent {
         private userService: UserService,
         private itemService: ItemService,
         private accountService: AccountService,
+        private orderService: OrderService,
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
@@ -75,6 +77,7 @@ export class HomeComponent {
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
         this.selectItemdataSource = new MatTableDataSource<TableRow>();
+        this.cartDataSource = new MatTableDataSource<TableRow>();
         this.userProfile = this.accountService.loginResponse.$userProfile;
         this.userService.getAllSellers(this.userProfile.$zipcode).subscribe(
             data => {
@@ -88,8 +91,26 @@ export class HomeComponent {
     ngOnDestroy() {
         this.appComponent.cartCount = 0;
     }
-
+    placeOrder() {
+        let placeOrderRequest = new PlaceOrderRequest();
+        placeOrderRequest.$buyerProfileId = this.userProfile.$userProfileId;
+        let itemInventoryList = new Array(this.cartDataSource.data.length);
+        this.cartDataSource.data.forEach(data => { 
+            itemInventoryList.push(data.itemInventory);
+            itemInventoryList.shift();
+        });
+        placeOrderRequest.$itemInventoryList = itemInventoryList;
+        this.orderService.placeOrder(placeOrderRequest).subscribe(
+            data => {
+                this.router.navigate(['/orders']);
+                this.alertService.success('Order Placed Successfully');
+            },
+            error => {
+                this.alertService.error(error);
+            });
+    }
     selectionChange(event) {
+        this.alertService.clear();
         if (event.selectedIndex === 0) {
             this.userService.getAllSellers(this.userProfile.$zipcode).subscribe(
                 data => {
@@ -182,7 +203,13 @@ export class HomeComponent {
     }
     private countCartItems() {
         this.appComponent.$cartCount = 0;
+        this.totalCartPrice = 0;
+        this.cartDataSource = new MatTableDataSource<TableRow>();
         this.selectItemdataSource.data.forEach(data => {
+            if (data.count > 0) {
+                this.totalCartPrice += (data.count * data.itemInventory.$price);
+                this.cartDataSource.data.push(data);
+            }
             this.appComponent.$cartCount += data.count;
         });
 

@@ -44,4 +44,8 @@ public @Getter @Setter @Entity class ItemInventory {
 		this.quantity = quantity;
 		this.unit = unit;
 	}
+	
+	public ItemInventory(Long id) {
+		this.id = id;
+	}
 }

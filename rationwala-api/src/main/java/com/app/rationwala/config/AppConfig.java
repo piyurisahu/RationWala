@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.app.rationwala.modeller.ItemModeller;
+import com.app.rationwala.modeller.OrderModeller;
 import com.app.rationwala.modeller.ProfileModeller;
 import com.app.rationwala.service.AccountService;
 import com.app.rationwala.service.AccountServiceImpl;
@@ -45,5 +46,10 @@ public class AppConfig {
 	@Bean
 	public ItemModeller getItemModeller() {
 		return new ItemModeller();
+	}
+	
+	@Bean
+	public OrderModeller getOrderModeller() {
+		return new OrderModeller();
 	}
 }

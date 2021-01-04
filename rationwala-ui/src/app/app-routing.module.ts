@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-
-import { HomeComponent } from './home';
+import { RouterModule, Routes } from '@angular/router';
+import { EditProfileComponent } from './account/edit-profile.component';
+import { HomeComponent, OrdersComponent } from './home';
 import { AuthGuard } from './_helpers';
+
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+    { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
 
     // otherwise redirect to home
