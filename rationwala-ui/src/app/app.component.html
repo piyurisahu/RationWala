@@ -7,8 +7,8 @@
         <span class="example-fill-remaining-space"></span>
         <span class="align-center"></span>
         <span class="example-spacer"></span>
-        <button mat-button fxShow="true" fxHide.lt-md="true">About</button>
-        <button mat-button fxShow="true" fxHide.lt-md="true">Contact</button>
+        <button mat-button fxShow="true" fxHide.lt-md="true" routerLink="/about-us">About</button>
+        <button mat-button fxShow="true" fxHide.lt-md="true" routerLink="/contact-us">Contact US</button>
         <button *ngIf="isLoggedIn" mat-button>
             <mat-icon matBadge="{{cartCount}}" matBadgeColor="accent" [matBadgeHidden]="cartCount ==0">shopping_cart</mat-icon>
         </button>
