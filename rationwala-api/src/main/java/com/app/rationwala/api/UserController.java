@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +15,14 @@ import com.app.rationwala.dto.GetAllSellersResponse;
 import com.app.rationwala.dto.enums.Status;
 import com.app.rationwala.service.UserService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("user")
 @Slf4j
+@Api(tags = { "User API"}, value="UserController", description="This controller contains all APIs realted to users such as get all seller accounts.")
 public class UserController extends AbstractController {
 
 	@Autowired
@@ -27,11 +31,11 @@ public class UserController extends AbstractController {
 	@Autowired
 	private Environment env;
 
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String index() {
 		return "Please go to user methods";
 	}
-	
+	@ApiOperation(value="Get All sellers")
 	@PostMapping(value = "seller/all", produces = "application/json")
 	public ResponseEntity<GetAllSellersResponse> getAllSellers(@RequestBody GetAllSellersRequest getAllSellersRequest) {
 		ResponseEntity<GetAllSellersResponse> res = null;

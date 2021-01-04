@@ -11,6 +11,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // used to create fake backend
 import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './_helpers';
+import { StoreOrdersComponent } from './home/store-orders.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { ErrorInterceptor, fakeBackendProvider, JwtInterceptor } from './_helper
         AppComponent,
         AlertComponent,
         HomeComponent,
-        OrdersComponent
+        OrdersComponent,
+        StoreOrdersComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

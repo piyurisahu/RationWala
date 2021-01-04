@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.app.rationwala.dto.ChangeOrderStatusRequest;
+import com.app.rationwala.dto.ChangeOrderStatusResponse;
 import com.app.rationwala.dto.GetOrderRequest;
 import com.app.rationwala.dto.GetOrderResponse;
 import com.app.rationwala.dto.PlaceOrderRequest;
@@ -40,7 +42,7 @@ public class OrderServiceImpl implements OrderService {
 		res.getStatusInfo().setMessages(new ArrayList<>());
 		double totalPrice = 0;
 		for (ItemInventory ii : placeOrderRequest.getItemInventoryList()) {
-			totalPrice += (ii.getPrice()*ii.getOrderCount());
+			totalPrice += (ii.getPrice() * ii.getOrderCount());
 		}
 		Date date = Calendar.getInstance().getTime();
 		PurchaseOrder po = purchaseOrderRepository
@@ -74,8 +76,25 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public GetOrderResponse getOrdersBySeller(GetOrderRequest placeOrderRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		GetOrderResponse res = new GetOrderResponse();
+		res.setStatusInfo(new StatusInfo());
+		res.getStatusInfo().setMessages(new ArrayList<>());
+		res.setPurchaseOrderList(orderModeller.marshallPurchaseOrderToPurchaseOrder(
+				orderItemRepository.findBySellerId(placeOrderRequest.getUserId())));
+		res.getStatusInfo().setStatus(Status.SUCCESS);
+		return res;
+	}
+
+	@Override
+	public ChangeOrderStatusResponse changeOrderStatus(ChangeOrderStatusRequest changeOrderStatusRequest) {
+		ChangeOrderStatusResponse res = new ChangeOrderStatusResponse();
+		res.setStatusInfo(new StatusInfo());
+		res.getStatusInfo().setMessages(new ArrayList<>());
+		PurchaseOrder po = purchaseOrderRepository.findById(changeOrderStatusRequest.getPurchaseOrder().getId()).get();
+		po.setOrderStatus(changeOrderStatusRequest.getPurchaseOrder().getOrderStatus());
+		purchaseOrderRepository.save(po);
+		res.getStatusInfo().setStatus(Status.SUCCESS);
+		return res;
 	}
 
 }

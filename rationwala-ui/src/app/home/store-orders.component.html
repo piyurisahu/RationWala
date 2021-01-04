@@ -1,0 +1,54 @@
+﻿<div class="m-5"><h1>Your Orders</h1></div>
+<mat-accordion *ngFor="let od of orders">
+    <mat-expansion-panel expanded="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Order no : {{od.purchaseOrder.id}} | {{od.purchaseOrder.$buyerProfile.$firstName + ' ' + od.purchaseOrder.$buyerProfile.$lastName}}
+        </mat-panel-title>
+        <mat-panel-description>
+            Purchase Date: {{od.purchaseOrder.purchaseDate}}-------Order is currently in {{od.purchaseOrder.orderStatus}} status-------Total: Rs. {{od.purchaseOrder.totalPrice}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <label>Change order status</label>
+      <mat-radio-group [formControl]="od.changeStatusForm.controls.selectStore" fxLayout="row" fxLayout="row wrap" fxLayoutGap="32px" (change)="radioChange($event, od.purchaseOrder)">
+        <mat-radio-button value="PLACED">Placed</mat-radio-button>
+        <mat-radio-button value="PREPARING">Preparing</mat-radio-button>
+        <mat-radio-button value="READY_FOR_PICKUP">Ready For Pickup</mat-radio-button>
+        <mat-radio-button value="PICKED_UP">Picked Up</mat-radio-button>
+        <mat-radio-button value="DELIVERED">Delivered</mat-radio-button>
+        <mat-radio-button value="OUT_FOR_DELIVERY">Out For Delivery</mat-radio-button>
+      </mat-radio-group>
+      <table mat-table [dataSource]="od.purchaseOrder.inventoryItemList" class="mat-elevation-z8">
+        <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="main">
+            <th mat-header-cell *matHeaderCellDef>Item name</th>
+            <td mat-cell *matCellDef="let element">{{element.$item.$itemBrand + ' ' + element.$item.$itemName}}</td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="quantity">
+            <th class="text-center" mat-header-cell *matHeaderCellDef>Quantity</th>
+            <td class="text-center" mat-cell *matCellDef="let element"> {{element.$quantity + ' ' + (element.$unit == 'KILO_GRAM' ? 'Kg.' : element.$unit == 'LITER' ? 'Ltr.' : element.$unit == 'GRAM' ? 'gm.' : element.$unit == 'ML' ? 'ml.' : '')}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="price">
+            <th class="text-center"  mat-header-cell *matHeaderCellDef> Price ₹</th>
+            <td class="text-center"  mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="count">
+            <th class="text-center" mat-header-cell *matHeaderCellDef>Count</th>
+            <td class="text-center" mat-cell *matCellDef="let element">
+                <label matLabel>{{element.orderCount}}</label>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    </mat-expansion-panel>
+  </mat-accordion>

@@ -4,6 +4,7 @@ import { EditProfileComponent } from './account/edit-profile.component';
 import { HomeComponent, OrdersComponent } from './home';
 import { AboutUsComponent } from './home/about.component';
 import { ContactUsComponent } from './home/contact.component';
+import { StoreOrdersComponent } from './home/store-orders.component';
 import { AuthGuard } from './_helpers';
 
 
@@ -12,6 +13,7 @@ const accountModule = () => import('./account/account.module').then(x => x.Accou
 const routes: Routes = [
     { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+    { path: 'store-orders', component: StoreOrdersComponent, canActivate: [AuthGuard] },
     { path: 'edit-profile', component: EditProfileComponent, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
     { path: 'about-us', component: AboutUsComponent},

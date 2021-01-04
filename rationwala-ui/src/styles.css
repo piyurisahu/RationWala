@@ -33,7 +33,7 @@ input::-webkit-inner-spin-button {
 .mat-sort-header-container {
   justify-content: center;
 }
-mat-radio-button label {
+.home mat-radio-button label {
   height: 15em !important;
   width: 15em !important;
   border: 1px solid white;
@@ -41,11 +41,11 @@ mat-radio-button label {
   padding: 1em;
   align-items: flex-end !important;
 }
-mat-radio-button {
+.home mat-radio-button {
   background-size: 10em 10em;
   background-repeat: no-repeat !important;
   background-position: center;
 }
-mat-radio-button label:hover {
+.home mat-radio-button label:hover {
   border-color: #3f51b5;
 }

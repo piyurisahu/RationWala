@@ -21,6 +21,10 @@
                 <mat-icon>supervisor_account</mat-icon>
                 <span>Profile</span>
             </button>
+            <button *ngIf="isLoggedIn && loginResponse.$userProfile.$sellerProfile" mat-menu-item routerLink="/store-orders">
+                <mat-icon>reorder</mat-icon>
+                <span>Store Orders</span>
+            </button>
             <button mat-menu-item routerLink="/orders">
                 <mat-icon>reorder</mat-icon>
                 <span>Orders</span>

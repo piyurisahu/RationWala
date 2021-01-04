@@ -12,5 +12,8 @@ public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
 
 	@Query("SELECT a FROM OrderItem a WHERE a.purchaseOrder.id=:purchaseOrderId")
 	public List<OrderItem> findByPurchaseOrder(@Param("purchaseOrderId") Long purchaseOrderId);
+	
+	@Query("SELECT a FROM OrderItem a WHERE a.itemInventory.sellerProfile.id=:sellerProfileId")
+	public List<OrderItem> findBySellerId(@Param("sellerProfileId") Long sellerProfileId);
 
 }
