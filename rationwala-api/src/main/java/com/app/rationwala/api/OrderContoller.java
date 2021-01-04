@@ -1,5 +1,6 @@
 package com.app.rationwala.api;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -33,11 +34,13 @@ public class OrderContoller extends AbstractController {
 	@Autowired
 	private Environment env;
 
+	@ApiOperation(value="This is health check for api")
 	@GetMapping("/")
 	public String index() {
 		return "Please go to order methods";
 	}
 
+	@ApiOperation(value="This api is used to place order by user")
 	@PostMapping(value = "placeOrder", produces = "application/json")
 	public ResponseEntity<PlaceOrderResponse> placeOrder(@RequestBody PlaceOrderRequest placeOrderRequest) {
 		ResponseEntity<PlaceOrderResponse> res = null;
@@ -57,7 +60,8 @@ public class OrderContoller extends AbstractController {
 		}
 		return res;
 	}
-	
+
+	@ApiOperation(value="This API fetch order placed by buyer")
 	@PostMapping(value = "buyer", produces = "application/json")
 	public ResponseEntity<GetOrderResponse> getOrdersbyBuyer(@RequestBody GetOrderRequest getOrderRequest) {
 		ResponseEntity<GetOrderResponse> res = null;
@@ -76,7 +80,8 @@ public class OrderContoller extends AbstractController {
 		}
 		return res;
 	}
-	
+
+	@ApiOperation(value="This API fetch the orders made by seller")
 	@PostMapping(value = "seller", produces = "application/json")
 	public ResponseEntity<GetOrderResponse> getOrdersbySeller(@RequestBody GetOrderRequest getOrderRequest) {
 		ResponseEntity<GetOrderResponse> res = null;
@@ -95,6 +100,8 @@ public class OrderContoller extends AbstractController {
 		}
 		return res;
 	}
+
+	@ApiOperation(value="Seller updates order status")
 	@PostMapping(value = "status/change", produces = "application/json")
 	public ResponseEntity<ChangeOrderStatusResponse> changeOrderStatus(@RequestBody ChangeOrderStatusRequest changeOrderStatusRequest) {
 		ResponseEntity<ChangeOrderStatusResponse> res = null;

@@ -38,6 +38,7 @@ public class AccountController extends AbstractController {
 	@Autowired
 	private Environment env;
 
+	@ApiOperation(value="This is health check for api")
 	@GetMapping("/")
 	public String index() {
 		return "Please go to user methods";
@@ -62,7 +63,7 @@ public class AccountController extends AbstractController {
 		}
 		return res;
 	}
-
+	@ApiOperation(value="Login(Seller/User) to Rationwala application ")
 	@PostMapping(value = "login", produces = "application/json")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
 		ResponseEntity<LoginResponse> res = null;
@@ -84,6 +85,7 @@ public class AccountController extends AbstractController {
 		return res;
 	}
 
+	@ApiOperation(value="Register User in Rationwala application")
 	@PostMapping(value = "register", produces = "application/json")
 	public ResponseEntity<RegisterResponse> register(@RequestBody RegisterRequest registerRequest) {
 		ResponseEntity<RegisterResponse> res = null;
@@ -98,6 +100,7 @@ public class AccountController extends AbstractController {
 		return res;
 	}
 
+	@ApiOperation(value="Authorize users")
 	@PostMapping(value = "authorize", produces = "application/json")
 	public ResponseEntity<AuthorizeStaffResponse> authorizestaff(
 			@RequestBody AuthorizeStaffRequest authorizeStaffRequest) {

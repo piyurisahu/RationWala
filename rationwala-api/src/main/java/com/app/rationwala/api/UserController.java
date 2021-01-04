@@ -31,10 +31,12 @@ public class UserController extends AbstractController {
 	@Autowired
 	private Environment env;
 
+	@ApiOperation(value="This is health check for api")
 	@GetMapping("/")
 	public String index() {
 		return "Please go to user methods";
 	}
+
 	@ApiOperation(value="Get All sellers")
 	@PostMapping(value = "seller/all", produces = "application/json")
 	public ResponseEntity<GetAllSellersResponse> getAllSellers(@RequestBody GetAllSellersRequest getAllSellersRequest) {

@@ -1,5 +1,6 @@
 package com.app.rationwala.api;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -30,11 +31,13 @@ public class ItemContoller extends AbstractController {
 	@Autowired
 	private Environment env;
 
+	@ApiOperation(value="This is health check for api")
 	@GetMapping("/")
 	public String index() {
 		return "Please go to item methods";
 	}
-	
+
+	@ApiOperation(value="Get item inventory of a specific seller")
 	@PostMapping(value = "sellerInventory", produces = "application/json")
 	public ResponseEntity<GetSellerInventoryResponse> getSellerInventory(@RequestBody GetSellerInventoryRequest getAllSellerItemsRequest) {
 		ResponseEntity<GetSellerInventoryResponse> res = null;
