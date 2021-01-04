@@ -21,6 +21,7 @@ import com.app.rationwala.entity.UserProfile;
 import com.app.rationwala.model.ItemInventory;
 import com.app.rationwala.model.StatusInfo;
 import com.app.rationwala.modeller.OrderModeller;
+import com.app.rationwala.repository.ItemInventoryRepository;
 import com.app.rationwala.repository.OrderItemRepository;
 import com.app.rationwala.repository.PurchaseOrderRepository;
 
@@ -31,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderItemRepository orderItemRepository;
+	
+	@Autowired
+	private ItemInventoryRepository itemInventoryRepository;
 
 	@Autowired
 	private OrderModeller orderModeller;
@@ -52,6 +56,11 @@ public class OrderServiceImpl implements OrderService {
 			orderItemRepository.save(new OrderItem(new com.app.rationwala.entity.ItemInventory(itemInventory.getId()),
 					po, itemInventory.getPrice(), itemInventory.getOrderCount()));
 
+		});
+		placeOrderRequest.getItemInventoryList().forEach(itemInventory->{
+			com.app.rationwala.entity.ItemInventory itinv = itemInventoryRepository.findById(itemInventory.getId()).get();
+			itinv.setCountInStock(itinv.getCountInStock() - itemInventory.getOrderCount());
+			itemInventoryRepository.save(itinv);
 		});
 		res.getStatusInfo().setStatus(Status.SUCCESS);
 		return res;
